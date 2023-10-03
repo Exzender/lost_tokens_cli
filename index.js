@@ -1,8 +1,10 @@
 const { Web3 } = require('web3')
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args))
-const { tokens, contracts, rpcMap, ERC20 } = require('./const')
+// NOTE default tokens and contracts list moved to const.js file
+const { tokens, contracts, rpcMap, ERC20, functionSignature } = require('./const')
 const chains = [...rpcMap.keys()]
 
+// how many concurrent requests to make - different node may limit number of incoming requests - so 20 is a good compromise
 const asyncProcsNumber = 20
 
 function numberWithCommas(x) {
@@ -18,8 +20,10 @@ async function getTokenInfo(web3, contractAddress) {
     const token = new web3.eth.Contract(ERC20, contractAddress)
 
     const promises = []
-    promises.push(token.methods.symbol().call()) // ticker
-    promises.push(token.methods.decimals().call()) // decimals
+    // NOTE with web3 v4 it will not provide data auto field when calling contract method - and some nodes will fail to
+    // process request without data field
+    promises.push(token.methods.symbol().call({data: functionSignature.get('symbol')})) // ticker
+    promises.push(token.methods.decimals().call({data: functionSignature.get('decimals')})) // decimals
     const results = await Promise.allSettled(promises)
 
     const validToken = results[0].status === 'fulfilled'
@@ -37,7 +41,7 @@ async function getTokenInfo(web3, contractAddress) {
 }
 
 async function getBalanceOf (token, address){
-    return await token.methods.balanceOf(address).call().catch(async () => {
+    return await token.methods.balanceOf(address).call({data: functionSignature.get('balanceOf')}).catch(async () => {
         return await getBalanceOf(token, address)
     })
 }
@@ -84,11 +88,10 @@ async function findBalances(web3, contractList, tokenObject) {
 
 // main ()
 (async () => {
+    // can provide active chain via env var.
+    // list of supported predefined chains in rpcMap const.
     const chain = (process.env.CHAIN || chains[0]).toLowerCase()
     const rpc = rpcMap.get(chain)
-
-    // console.log(chain)
-    // console.log(rpc)
 
     // can use any of supported chains
     const web3provider = new Web3(rpc)
@@ -98,7 +101,6 @@ async function findBalances(web3, contractList, tokenObject) {
     const chainContracts = contracts[chain]
 
     // NOTE append here custom tokens and contracts
-    // NOTE on page get TokenInfo for each custom token instant after addition
 
     const objectTokens = []
     let promises = []
