@@ -4,7 +4,7 @@ const { Web3 } = require('web3')
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args))
 
 // NOTE default tokens and contracts list moved to const.js file
-const { tokens, contracts, rpcMap, ERC20, functionSignature } = require('./const')
+const { tokens, contracts, rpcMap, ERC20 } = require('./const')
 const chains = [...rpcMap.keys()]
 
 // how many concurrent requests to make - different node may limit number of incoming requests - so 20 is a good compromise
@@ -38,8 +38,8 @@ async function getTokenInfo(web3, contractAddress) {
     const promises = []
     // NOTE with web3 v4 it will not provide data auto field when calling contract method - and some nodes will fail to
     // process request without data field
-    promises.push(token.methods.symbol().call({data: functionSignature.get('symbol')})) // ticker
-    promises.push(token.methods.decimals().call({data: functionSignature.get('decimals')})) // decimals
+    promises.push(token.methods.symbol().call({data: '0x1'})) // ticker
+    promises.push(token.methods.decimals().call({data: '0x1'})) // decimals
     const results = await Promise.allSettled(promises)
 
     // treating token as invalid when can't get its symbol from blockchain
@@ -66,7 +66,7 @@ async function getTokenInfo(web3, contractAddress) {
  * @return {Promise<number>} A promise that resolves to the balance of the address.
  */
 async function getBalanceOf (token, address){
-    return await token.methods.balanceOf(address).call({data: functionSignature.get('balanceOf')}).catch(async () => {
+    return await token.methods.balanceOf(address).call({data: '0x1'}).catch(async () => {
         return await getBalanceOf(token, address)
     })
 }
