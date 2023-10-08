@@ -59,7 +59,11 @@ const eth_tokens = [
 ]
 
 const eth_contracts = [
-    '0x6810e776880c02933d47db1b9fc05908e5386b96'
+    '0x6bba316c48b49bd1eac44573c5c871ff02958469',
+    '0x80fB784B7eD66730e8b1DBd9820aFD29931aab03',
+    '0x4a220e6096b25eadb88358cb44068a3248254675',
+    '0x622dFfCc4e83C64ba959530A5a5580687a57581b',
+    '0x543ff227f64aa17ea132bf9886cab5db55dcaddf'
 ]
 
 const bsc_tokens = [
@@ -105,7 +109,7 @@ const tokens = {
 
 // export const rpcMap
 const rpcMap = new Map([
-    ['eth', 'https://eth.llamarpc.com'], // https://eth.meowrpc.com'], // 'https://ethereum.publicnode.com'], // 'https://eth.llamarpc.com'
+    ['eth', 'https://eth.llamarpc.com'], // https://eth.meowrpc.com'], // 'https://ethereum.publicnode.com'], // 'https://eth.llamarpc.com' // https://rpc.eth.gateway.fm
     ['bsc', 'https://binance.llamarpc.com'],
     ['polygon', 'https://polygon.llamarpc.com']
 ])

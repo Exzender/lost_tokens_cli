@@ -1,3 +1,5 @@
+const fs = require('fs');
+const path = require('path');
 const { Web3 } = require('web3')
 
 // NOTE walkaround to use fetch from old node.js
@@ -8,7 +10,30 @@ const { tokens, contracts, rpcMap, ERC20 } = require('./const')
 const chains = [...rpcMap.keys()]
 
 // how many concurrent requests to make - different node may limit number of incoming requests - so 20 is a good compromise
-const asyncProcsNumber = 20
+const asyncProcsNumber = 100
+
+function checkEthAddress(web3, address) {
+    try {
+        web3.utils.toChecksumAddress(address);
+        return true;
+    } catch (e) {
+        return false;
+    }
+}
+
+function parseAddress(web3, address) {
+    const result = [];
+    const list = address.split(/\n|;|,|;\n|,\n/)
+
+    for (const l of list) {
+        const name = l.trim()
+        if (checkEthAddress(web3, name)) {
+            result.push(name)
+        }
+    }
+
+    return result.join('\n')
+}
 
 /**
  * Formats a number with commas (e.g. 123,234,660.12)
@@ -47,7 +72,16 @@ async function getTokenInfo(web3, contractAddress) {
     const ticker = validToken ? results[0].value : 'unknown'
 
     // getting price from 3rd party API - may have limits on number of requests
-    const priceObj = validToken ? (await (await fetch(`https://min-api.cryptocompare.com/data/price?fsym=${ticker}&tsyms=USD`)).json()) : {}
+    let priceObj = {
+        USD: 0
+    }
+    try {
+        if (validToken) {
+            priceObj =(await (await fetch(`https://min-api.cryptocompare.com/data/price?fsym=${ticker}&tsyms=USD`)).json())
+        }
+    } catch (e) {
+        console.error(e)
+    }
 
     return {
         address: contractAddress,
@@ -124,6 +158,74 @@ async function findBalances(web3, contractList, tokenObject) {
     return records
 }
 
+async function processOneToken(web3, contractList, tokenAddress) {
+    const tokenObject = await getTokenInfo(web3, tokenAddress)
+
+    // console.dir(tokenObject);
+
+    if (!tokenObject.valid) {
+        return {
+            tokenAddress,
+            price: 0,
+            decimals: 18,
+            ticker: null,
+            records: []
+        }
+    }
+
+    if (tokenObject.price === 0) {
+        return {
+            tokenAddress,
+            ticker: tokenObject.ticker,
+            decimals: tokenObject.decimals,
+            price: -1, // no price
+            records: []
+        }
+    }
+
+    const results = await findBalances(web3, contractList, tokenObject);
+// console.dir(results)
+
+    return {
+        tokenAddress,
+        ticker: tokenObject.ticker,
+        decimals: tokenObject.decimals,
+        price: tokenObject.price,
+        records: results
+    }
+}
+
+function formatTokenResult(res) {
+    let localStr = ''
+
+    if (!res.ticker) { // invalid token
+        return { resStr : `??? [${res.tokenAddress}] - unknown token\n`, asDollar: 0 }
+    }
+
+    if (res.price === -1) { // can't get price
+        return { resStr : `${res.ticker} [${res.tokenAddress}]: not checked - no price found\n`, asDollar: 0 }
+    }
+
+    // normal process
+    let sum = 0n
+
+    // records already sorted by value - formatting output
+    for (const record of res.records) {
+        const str = `Contract ${record.contract} => ${numberWithCommas(record.roundedAmount)} ${res.ticker} ( $${record.dollarValue} )`
+        sum += record.amount
+        localStr += str + '\n'
+    }
+
+    // increasing sum value
+    const roundedAmount = Number(sum) / Number(`1e${res.decimals}`)
+    const asDollar = roundedAmount * res.price
+
+    const header = `${res.ticker} [${res.tokenAddress}]: ${numberWithCommas(roundedAmount)} tokens lost / $${numberWithCommas(asDollar)}`
+    localStr = header + '\n-----------------------------------------------\n' + localStr
+
+    return { resStr: localStr, asDollar }
+}
+
 // main ()
 (async () => {
     // can provide active chain via env var.
@@ -135,70 +237,66 @@ async function findBalances(web3, contractList, tokenObject) {
     const web3provider = new Web3(rpc)
 
     // get default tokens and contracts for current chain
-    const chainTokens = tokens[chain]
-    const chainContracts = contracts[chain]
+    const chainTokensStr = tokens[chain].join('\n');
+    const chainContractsStr = contracts[chain].join('\n');
 
-    // NOTE append here custom tokens and contracts
+    // add tokens from text file
+    let parsed = '';
+    let parsedContracts = '';
+    if (chain === 'eth') {
+        const tokensFromFile = fs.readFileSync(path.resolve(__dirname, 'tokens_list.txt'), 'utf8');
+        parsed = parseAddress(web3provider, tokensFromFile) + '\n' + chainTokensStr;
 
-    const objectTokens = []
-    let promises = []
-    let counter = 0
-
-    console.time('getTokenInfo')
-
-    // get info for provided tokens
-    for (const token of chainTokens) {
-        counter++
-        promises.push(getTokenInfo(web3provider, token))
-        if (counter % asyncProcsNumber === 0) {
-            objectTokens.push(...await Promise.all(promises))
-            promises = []
-            counter = 0
-        }
+        const contractsFromFile = fs.readFileSync(path.resolve(__dirname, 'excluded_tokens.txt'), 'utf8');
+        parsedContracts = parseAddress(web3provider, contractsFromFile) + '\n' + chainContractsStr;
     }
-    if (promises.length) {
-        objectTokens.push(...await Promise.all(promises))
-    }
-
-    // check time taken by info gathering
-    console.timeEnd('getTokenInfo')
-
-    // exclude duplicates
-    const contractList = Array.from(new Set(chainContracts.concat(chainTokens)));
-
-    let wholeSum = 0
 
     console.time('getBalances')
 
     // process tokens - find lost balances
-    for (const token of objectTokens) {
-        if (token.valid) {
-            const results = await findBalances(web3provider, contractList, token);
+    const chainTokens = parsed.split('\n')
+    const chainContracts = parsedContracts.split('\n')
 
-            let sum = 0n
+    console.log(`Tokens: ${chainTokens.length}`);
+    console.log(`Contracts: ${chainContracts.length}`);
 
-            // records already sorted by value - formatting output
-            for (const record of results) {
-                const str = `Contract ${record.contract} => ${numberWithCommas(record.roundedAmount)} ${token.ticker} ($${numberWithCommas(record.dollarValue)})`
-                sum += record.amount
-                console.log(str)
-            }
+    const contractListArray = Array.from(new Set(chainContracts.concat(chainTokens)))
+    console.log(`Addresses: ${contractListArray.length}`);
 
-            // increasing sum value
-            const roundedAmount = Number(sum / BigInt(Number(`1e${token.decimals}`)))
-            const asDollar = roundedAmount * token.price
-            wholeSum += asDollar
+    const resultsArray = []
+    let wholeSum = 0
+    let counter = 0
 
-            // bottom line
-            const header = `${token.ticker}: ${numberWithCommas(roundedAmount)} tokens lost / $${numberWithCommas(asDollar)}`
-            console.log(header);
-        }
+    for (const tokenAddress of chainTokens) {
+        console.time('getOneBalance')
+        const res = await processOneToken(web3provider, contractListArray, tokenAddress)
+
+        const formatted = formatTokenResult(res)
+
+        wholeSum += formatted.asDollar
+        resultsArray.push({
+            ...res,
+            asDollar: formatted.asDollar
+        })
+
+        counter++;
+        console.log(counter, '.', res.ticker, ':', formatted.asDollar);
+        console.timeEnd('getOneBalance')
     }
+
+    resultsArray.sort(function (a, b) {
+        return b.asDollar - a.asDollar
+    })
+
+    let resStr = '';
+    for (const res of resultsArray) {
+        const formatted = formatTokenResult(res)
+        resStr += formatted.resStr + '\n'
+    }
+
+    resStr = `WHOLE SUM: $${numberWithCommas(wholeSum)} for ${counter} tokens\n\n` + resStr;
+
     console.timeEnd('getBalances')
 
-    console.log()
-    const itog = `Sum lost:  $${numberWithCommas(wholeSum)}`
-    console.log(itog);
-
-    // TODO sort tokens by result sum
+    fs.writeFileSync(path.resolve(__dirname, 'lost_tokens_result.txt'), resStr, 'utf8');
 })();
