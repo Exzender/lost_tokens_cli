@@ -1,14 +1,14 @@
 {
   "name": "lost_tokens_cli",
   "version": "1.0.1",
-  "description": "",
+  "description": "EVM blockchain lost tokens scanner CLI",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Exzender",
+  "license": "MIT",
   "dependencies": {
     "node-fetch": "^3.3.2",
     "web3": "^4.1.2"
