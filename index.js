@@ -10,7 +10,7 @@ const { tokens, contracts, rpcMap, ERC20 } = require('./const')
 const chains = [...rpcMap.keys()]
 
 // how many concurrent requests to make - different node may limit number of incoming requests - so 20 is a good compromise
-const asyncProcsNumber = 100
+const asyncProcsNumber = 10
 
 function checkEthAddress(web3, address) {
     try {
@@ -42,6 +42,7 @@ function parseAddress(web3, address) {
  * @return {string} The formatted number as a string.
  */
 function numberWithCommas(x) {
+    if (x < 0.000001) return '0.00'
     const parts = x.toString().split(".")
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     if (parts.length > 1) {
@@ -254,7 +255,8 @@ function formatTokenResult(res) {
     console.time('getBalances')
 
     // process tokens - find lost balances
-    const chainTokens = parsed.split('\n')
+    let chainTokens = parsed.split('\n')
+    chainTokens = Array.from(new Set(chainTokens))
     const chainContracts = parsedContracts.split('\n')
 
     console.log(`Tokens: ${chainTokens.length}`);
