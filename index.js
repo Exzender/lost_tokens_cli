@@ -9,9 +9,9 @@ const { tokens, contracts, rpcMap } = require('./const');
 const chains = [...rpcMap.keys()];
 
 // NOTE: // default: 'eth_tokens_list.txt' // w/o zero price = 'tokens_list.txt'; // fast test = 'tokens_list_short.txt';
-const TOKENS_FILE = process.env.TOKENS_FILE || 'tokens_list_short.txt';
+const TOKENS_FILE = process.env.TOKENS_FILE || 'eth_tokens_list.txt';
 // NOTE: // default: 'eth_contracts_list.txt' // w/o zero price = 'excluded_tokens.txt'; // fast test = 'tokens_list_short.txt';
-const CONTRACTS_FILE = process.env.CONTRACTS_FILE || 'tokens_list_short.txt';
+const CONTRACTS_FILE = process.env.CONTRACTS_FILE || 'eth_contracts_list.txt';
 
 // main ()
 (async () => {

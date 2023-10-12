@@ -2,7 +2,7 @@ const { ERC20, rpcMap, ethRpcArray} = require('./const');
 const { Web3 } = require('web3');
 
 // how many concurrent requests to make - different node may limit number of incoming requests - so 20 is a good compromise
-const asyncProcsNumber = 10
+const asyncProcsNumber = 10;
 const chains = [...rpcMap.keys()];
 const chain = (process.env.CHAIN || chains[0]).toLowerCase();
 
