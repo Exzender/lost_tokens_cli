@@ -122,7 +122,7 @@ const ethRpcArray = [
     'https://1rpc.io/eth', // 1:06 (with errors)
     'https://eth-rpc.gateway.pokt.network',  // 1:10
     // 'https://eth.llamarpc.com', // 1:50
-    // 'https://ethereum.publicnode.com', // 1:57
+    'https://ethereum.publicnode.com', // 1:57
 
     'https://eth.api.onfinality.io/public', // bad
     'https://rpc.payload.de', // bad

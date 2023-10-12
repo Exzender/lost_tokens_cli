@@ -55,16 +55,23 @@ function numberWithCommas(x) {
 async function getTokenInfo(web3, contractAddress) {
     const token = new web3.eth.Contract(ERC20, contractAddress);
 
-    const promises = [];
     // NOTE with web3 v4 it will not provide data auto field when calling contract method - and some nodes will fail to
     // process request without data field
-    promises.push(token.methods.symbol().call({data: '0x1'})); // ticker
-    promises.push(token.methods.decimals().call({data: '0x1'})); // decimals
-    const results = await Promise.allSettled(promises);
+    let ticker, validToken, decimals;
+
+    try {
+        ticker = await token.methods.symbol().call({data: '0x1'}); // ticker
+        decimals = await token.methods.decimals().call({data: '0x1'}); // decimals
+        validToken = true;
+    } catch (e) {
+        validToken = false;
+        ticker = 'unknown';
+        decimals = 18;
+    }
 
     // treating token as invalid when can't get its symbol from blockchain
-    const validToken = results[0].status === 'fulfilled';
-    const ticker = validToken ? results[0].value : 'unknown';
+    // const validToken = results[0].status === 'fulfilled';
+    // const ticker = validToken ? results[0].value : 'unknown';
 
     // getting price from 3rd party API - may have limits on number of requests
     let priceObj = {
@@ -99,7 +106,7 @@ async function getTokenInfo(web3, contractAddress) {
         address: contractAddress,
         ticker,
         valid: validToken,
-        decimals: Number(results[1].value) || 18,
+        decimals: Number(decimals) || 18,
         price: priceObj['price'] ?? priceObj['USD'] ?? 0
     }
 }
