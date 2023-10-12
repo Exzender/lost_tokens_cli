@@ -184,18 +184,18 @@ async function processOneToken(web3, contractList, tokenAddress) {
         }
     }
 
-    if (tokenObject.price === 0) {
-        return {
-            tokenAddress,
-            ticker: tokenObject.ticker,
-            decimals: tokenObject.decimals,
-            price: -1, // no price
-            records: []
-        }
-    }
+    // NOTE decided to find lost tokens even if there are no known price
+    // if (tokenObject.price === 0) {
+    //     return {
+    //         tokenAddress,
+    //         ticker: tokenObject.ticker,
+    //         decimals: tokenObject.decimals,
+    //         price: -1, // no price
+    //         records: []
+    //     }
+    // }
 
     const results = await findBalances(web3, contractList, tokenObject);
-// console.dir(results)
 
     return {
         tokenAddress,

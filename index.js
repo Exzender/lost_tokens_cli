@@ -8,6 +8,9 @@ const { numberWithCommas, parseAddress, processOneToken, formatTokenResult } = r
 const { tokens, contracts, rpcMap } = require('./const');
 const chains = [...rpcMap.keys()];
 
+const TOKENS_FILE = 'eth_tokens_list.txt'; // default: 'eth_tokens_list.txt' // w/o zero price = 'tokens_list.txt'; // fast test = 'tokens_list_short.txt';
+const CONTRACTS_FILE = 'eth_contracts_list.txt'; // default: 'eth_tokens_list.txt' // w/o zero price = 'excluded_tokens.txt'; // fast test = 'tokens_list_short.txt';
+
 // main ()
 (async () => {
     // can provide active chain via env var.
@@ -26,10 +29,10 @@ const chains = [...rpcMap.keys()];
     let parsed;
     let parsedContracts;
     if (chain === 'eth') {
-        const tokensFromFile = fs.readFileSync(path.resolve(__dirname, 'tokens_list.txt'), 'utf8');
+        const tokensFromFile = fs.readFileSync(path.resolve(__dirname + '/in', TOKENS_FILE), 'utf8');
         parsed = parseAddress(web3provider, tokensFromFile) + '\n' + chainTokensStr;
 
-        const contractsFromFile = fs.readFileSync(path.resolve(__dirname, 'excluded_tokens.txt'), 'utf8');
+        const contractsFromFile = fs.readFileSync(path.resolve(__dirname + '/in', CONTRACTS_FILE), 'utf8');
         parsedContracts = parseAddress(web3provider, contractsFromFile) + '\n' + chainContractsStr;
     } else {
         parsed = chainTokensStr;
@@ -84,5 +87,6 @@ const chains = [...rpcMap.keys()];
 
     console.timeEnd('getBalances');
 
-    fs.writeFileSync(path.resolve(__dirname, 'lost_tokens_result.txt'), resStr, 'utf8');
+    fs.writeFileSync(path.resolve(__dirname + '/out', 'lost_tokens_result.txt'), resStr, 'utf8');
+    fs.writeFileSync(path.resolve(__dirname + '/out', 'lost_tokens_result.json'), resultsArray, 'utf8');
 })();
