@@ -8,8 +8,10 @@ const { numberWithCommas, parseAddress, processOneToken, formatTokenResult } = r
 const { tokens, contracts, rpcMap } = require('./const');
 const chains = [...rpcMap.keys()];
 
-const TOKENS_FILE = 'eth_tokens_list.txt'; // default: 'eth_tokens_list.txt' // w/o zero price = 'tokens_list.txt'; // fast test = 'tokens_list_short.txt';
-const CONTRACTS_FILE = 'eth_contracts_list.txt'; // default: 'eth_tokens_list.txt' // w/o zero price = 'excluded_tokens.txt'; // fast test = 'tokens_list_short.txt';
+// NOTE: // default: 'eth_tokens_list.txt' // w/o zero price = 'tokens_list.txt'; // fast test = 'tokens_list_short.txt';
+const TOKENS_FILE = process.env.TOKENS_FILE || 'tokens_list_short.txt';
+// NOTE: // default: 'eth_contracts_list.txt' // w/o zero price = 'excluded_tokens.txt'; // fast test = 'tokens_list_short.txt';
+const CONTRACTS_FILE = process.env.CONTRACTS_FILE || 'tokens_list_short.txt';
 
 // main ()
 (async () => {
@@ -88,5 +90,5 @@ const CONTRACTS_FILE = 'eth_contracts_list.txt'; // default: 'eth_tokens_list.tx
     console.timeEnd('getBalances');
 
     fs.writeFileSync(path.resolve(__dirname + '/out', 'lost_tokens_result.txt'), resStr, 'utf8');
-    fs.writeFileSync(path.resolve(__dirname + '/out', 'lost_tokens_result.json'), resultsArray, 'utf8');
+    fs.writeFileSync(path.resolve(__dirname + '/out', 'lost_tokens_result.json'), JSON.stringify(resultsArray, (_, v) => typeof v === 'bigint' ? v.toString() : v), 'utf8');
 })();

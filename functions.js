@@ -1,4 +1,5 @@
-const { ERC20, rpcMap} = require('./const');
+const { ERC20, rpcMap, ethRpcArray} = require('./const');
+const { Web3 } = require('web3');
 
 // how many concurrent requests to make - different node may limit number of incoming requests - so 20 is a good compromise
 const asyncProcsNumber = 10
@@ -111,8 +112,10 @@ async function getTokenInfo(web3, contractAddress) {
  * @return {Promise<number>} A promise that resolves to the balance of the address.
  */
 async function getBalanceOf (token, address){
-    return await token.methods.balanceOf(address).call({data: '0x1'}).catch(async () => {
-        return await getBalanceOf(token, address)
+    return await token.methods.balanceOf(address).call({data: '0x1'}).catch(async (e) => {
+        console.error('balanceOf error');
+        console.dir(token._requestManager._provider.clientUrl);
+        return await getBalanceOf(token, address);
     })
 }
 
@@ -126,7 +129,16 @@ async function getBalanceOf (token, address){
  */
 async function findBalances(web3, contractList, tokenObject) {
     // token - contract object
-    const token = new web3.eth.Contract(ERC20, tokenObject.address)
+    const tokens = [];
+
+    if (chain === 'eth') {
+        for (const rpc of ethRpcArray) {
+            const web3provider = new Web3(rpc);
+            tokens.push(new web3provider.eth.Contract(ERC20, tokenObject.address));
+        }
+    } else {
+        tokens.push(new web3.eth.Contract(ERC20, tokenObject.address));
+    }
 
     let promises = []
     let counter = 0;
@@ -134,14 +146,25 @@ async function findBalances(web3, contractList, tokenObject) {
     const records = []
 
     // iterate contracts
+    let token = tokens[0];
+
+
+
+    const arrayLength = tokens.length - 1;
     for (const address of contractList) {
         counter++
         promises.push(getBalanceOf(token, address))
         // process batch of async requests
         if (counter % asyncProcsNumber === 0) {
-            balances.push(...await Promise.all(promises))
-            promises = []
-            counter = 0
+            const idx = counter / asyncProcsNumber >> 0;
+            if (idx > arrayLength) {
+                balances.push(...await Promise.all(promises));
+                promises = [];
+                counter = 0;
+                token = tokens[0];
+            } else {
+                token = tokens[idx];
+            }
         }
     }
     if (promises.length) {
