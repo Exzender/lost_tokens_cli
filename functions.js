@@ -81,7 +81,7 @@ async function getTokenInfo(web3, contractAddress) {
         try {
             const tokenNonStd = new web3.eth.Contract(ERC20n, contractAddress);
             const symbol32 = await tokenNonStd.methods.symbol().call({data: '0x1'}); // ticker
-            ticker = web3.utils.hexToAscii(symbol32);
+            ticker = (web3.utils.hexToAscii(symbol32)).replaceAll(String.fromCharCode(0), '')
             console.log(`"bytes32" ticker: ${ticker}`)
             validToken = true;
         } catch (e) {
