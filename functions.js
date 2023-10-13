@@ -1,4 +1,4 @@
-const { ERC20, rpcMap, ethRpcArray} = require('./const');
+const { ERC20, ERC20n, rpcMap, ethRpcArray} = require('./const');
 const { Web3 } = require('web3');
 
 // how many concurrent requests to make - different node may limit number of incoming requests - so 20 is a good compromise
@@ -61,11 +61,39 @@ async function getTokenInfo(web3, contractAddress) {
 
     try {
         ticker = await token.methods.symbol().call({data: '0x1'}); // ticker
-        decimals = await token.methods.decimals().call({data: '0x1'}); // decimals
+        console.log(`"symbol" ticker: ${ticker}`)
         validToken = true;
     } catch (e) {
-        validToken = false;
-        ticker = 'unknown';
+        // console.error(e);
+    }
+
+    if (!ticker) {
+        try {
+            ticker = await token.methods.ticker().call({data: '0x1'}); // ticker
+            console.log(`"ticker" ticker: ${ticker}`)
+            validToken = true;
+        } catch (e) {
+            // console.error(e);
+        }
+    }
+
+    if (!ticker) {
+        try {
+            const tokenNonStd = new web3.eth.Contract(ERC20n, contractAddress);
+            const symbol32 = await tokenNonStd.methods.symbol().call({data: '0x1'}); // ticker
+            ticker = web3.utils.hexToAscii(symbol32);
+            console.log(`"bytes32" ticker: ${ticker}`)
+            validToken = true;
+        } catch (e) {
+            // console.error(e);
+            validToken = false;
+            ticker = 'unknown';
+        }
+    }
+
+    try {
+        decimals = await token.methods.decimals().call({data: '0x1'}); // decimals
+    } catch (e) {
         decimals = 18;
     }
 
@@ -119,9 +147,8 @@ async function getTokenInfo(web3, contractAddress) {
  * @return {Promise<number>} A promise that resolves to the balance of the address.
  */
 async function getBalanceOf (token, address){
-    return await token.methods.balanceOf(address).call({data: '0x1'}).catch(async (e) => {
-        console.error('balanceOf error');
-        console.dir(token._requestManager._provider.clientUrl);
+    return await token.methods.balanceOf(address).call({data: '0x1'}).catch(async () => {
+        console.error(`balanceOf error: ${token._requestManager._provider.clientUrl}`);
         return await getBalanceOf(token, address);
     })
 }
