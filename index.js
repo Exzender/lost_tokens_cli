@@ -2,6 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const { Web3 } = require('web3');
 
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+
 const { numberWithCommas, parseAddress, processOneToken, formatTokenResult } = require('./functions');
 
 // NOTE default tokens and contracts list moved to const.js file
