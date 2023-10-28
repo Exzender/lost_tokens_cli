@@ -153,6 +153,63 @@ async function getBalanceOf (token, address){
     })
 }
 
+async function distributeTasks(web3, workers, contractList) {
+    const taskQueue = [...contractList]; // Copy of the original tasks array.
+    const completedTasks = [];
+
+    while (taskQueue.length > 0) {
+        // Find the first available worker.
+        const availableWorkerIndex = await findAvailableWorker(workers);
+
+        if (availableWorkerIndex !== -1) {
+            // Assign the next task to the available worker.
+            const task = taskQueue.shift();
+            const worker = workers[availableWorkerIndex];
+
+            completedTasks.push(executeTask(worker, task));
+        }
+    }
+
+    // Wait for all workers to finish their tasks.
+    // await Promise.all(workers.map(worker => worker));
+
+    // console.log('All tasks are completed.');
+    // console.log(completedTasks);
+
+    return await Promise.all(completedTasks);
+}
+
+// Function to find the first available worker.
+async function findAvailableWorker(workers) {
+    return new Promise((resolve) => {
+        const checkAvailability = () => {
+            const index = workers.findIndex(worker => !worker.isBusy);
+
+            if (index !== -1) {
+                resolve(index);
+            } else {
+                setTimeout(checkAvailability, 10); // Check again in 100 milliseconds.
+            }
+        };
+
+        checkAvailability();
+    });
+}
+
+// Simulate task execution based on worker speed (you need to implement the actual task execution logic).
+function executeTask(worker, address) {
+    return new Promise((resolve) => {
+        // const executionTime = Math.random() * 1000; // Simulated execution time (adjust as needed).
+        worker.isBusy = true;
+        // console.time(`getBalances: ${worker.token._requestManager._provider.clientUrl} ${address}`);
+        getBalanceOf(worker.token, address).then((balance) => {
+            worker.isBusy = false;
+            // console.timeEnd(`getBalances: ${worker.token._requestManager._provider.clientUrl} ${address}`);
+            resolve(balance);
+        });
+    });
+}
+
 /**
  * Retrieves all balances on multiple contracts for a given token.
  *
@@ -163,45 +220,51 @@ async function getBalanceOf (token, address){
  */
 async function findBalances(web3, contractList, tokenObject) {
     // token - contract object
-    const tokens = [];
+    // const tokens = [];
+    const workers = [];
 
     if (chain === 'eth') {
         for (const rpc of ethRpcArray) {
             const web3provider = new Web3(rpc);
-            tokens.push(new web3provider.eth.Contract(ERC20, tokenObject.address));
+            // tokens.push(new web3provider.eth.Contract(ERC20, tokenObject.address));
+            workers.push({token: new web3provider.eth.Contract(ERC20, tokenObject.address), isBusy: false});
         }
     } else {
-        tokens.push(new web3.eth.Contract(ERC20, tokenObject.address));
+        // tokens.push(new web3.eth.Contract(ERC20, tokenObject.address));
+        workers.push({token: new web3.eth.Contract(ERC20, tokenObject.address), isBusy: false});
     }
 
-    let promises = []
-    let counter = 0;
-    const balances = []
+    const balances = await distributeTasks(web3, workers, contractList);
+    // console.dir(balances);
+
     const records = []
-
-    // iterate contracts
-    let token = tokens[0];
-
-    const arrayLength = tokens.length;
-    for (const address of contractList) {
-        counter++
-        promises.push(this.getBalanceOf(token, address))
-        // process batch of async requests
-
-        const idx = counter % arrayLength;
-        token = tokens[idx];
-
-        if (counter % (asyncProcsNumber * arrayLength) === 0) {
-            balances.push(...await Promise.all(promises));
-            promises = [];
-            // console.log(`reset counter: ${counter}`);
-            counter = 0;
-            // token = tokens[0];
-        }
-    }
-    if (promises.length) {
-        balances.push(...await Promise.all(promises))
-    }
+    // let promises = []
+    // let counter = 0;
+    // const balances = []
+    //
+    // // iterate contracts
+    // let token = tokens[0];
+    //
+    // const arrayLength = tokens.length;
+    // for (const address of contractList) {
+    //     counter++
+    //     promises.push(this.getBalanceOf(token, address))
+    //     // process batch of async requests
+    //
+    //     const idx = counter % arrayLength;
+    //     token = tokens[idx];
+    //
+    //     if (counter % (asyncProcsNumber * arrayLength) === 0) {
+    //         balances.push(...await Promise.all(promises));
+    //         promises = [];
+    //         // console.log(`reset counter: ${counter}`);
+    //         counter = 0;
+    //         // token = tokens[0];
+    //     }
+    // }
+    // if (promises.length) {
+    //     balances.push(...await Promise.all(promises))
+    // }
 
 
     // format acquired balances
