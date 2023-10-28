@@ -2,7 +2,7 @@ const { ERC20, ERC20n, rpcMap, ethRpcArray} = require('./const');
 const { Web3 } = require('web3');
 
 // how many concurrent requests to make - different node may limit number of incoming requests - so 20 is a good compromise
-const asyncProcsNumber = 5;
+// const asyncProcsNumber = 5;
 const chains = [...rpcMap.keys()];
 const chain = (process.env.CHAIN || chains[0]).toLowerCase();
 
@@ -97,10 +97,6 @@ async function getTokenInfo(web3, contractAddress) {
         decimals = 18;
     }
 
-    // treating token as invalid when can't get its symbol from blockchain
-    // const validToken = results[0].status === 'fulfilled';
-    // const ticker = validToken ? results[0].value : 'unknown';
-
     // getting price from 3rd party API - may have limits on number of requests
     let priceObj = {
         price: 0,
@@ -153,7 +149,7 @@ async function getBalanceOf (token, address){
     })
 }
 
-async function distributeTasks(web3, workers, contractList) {
+async function distributeTasks(workers, contractList) {
     const taskQueue = [...contractList]; // Copy of the original tasks array.
     const completedTasks = [];
 
@@ -169,12 +165,6 @@ async function distributeTasks(web3, workers, contractList) {
             completedTasks.push(executeTask(worker, task));
         }
     }
-
-    // Wait for all workers to finish their tasks.
-    // await Promise.all(workers.map(worker => worker));
-
-    // console.log('All tasks are completed.');
-    // console.log(completedTasks);
 
     return await Promise.all(completedTasks);
 }
@@ -197,9 +187,8 @@ async function findAvailableWorker(workers) {
 }
 
 // Simulate task execution based on worker speed (you need to implement the actual task execution logic).
-function executeTask(worker, address) {
+async function executeTask(worker, address) {
     return new Promise((resolve) => {
-        // const executionTime = Math.random() * 1000; // Simulated execution time (adjust as needed).
         worker.isBusy = true;
         // console.time(`getBalances: ${worker.token._requestManager._provider.clientUrl} ${address}`);
         getBalanceOf(worker.token, address).then((balance) => {
@@ -219,52 +208,21 @@ function executeTask(worker, address) {
  * @return {Array} returns an array of records containing contract balances
  */
 async function findBalances(web3, contractList, tokenObject) {
-    // token - contract object
-    // const tokens = [];
     const workers = [];
 
     if (chain === 'eth') {
         for (const rpc of ethRpcArray) {
             const web3provider = new Web3(rpc);
-            // tokens.push(new web3provider.eth.Contract(ERC20, tokenObject.address));
             workers.push({token: new web3provider.eth.Contract(ERC20, tokenObject.address), isBusy: false});
         }
     } else {
-        // tokens.push(new web3.eth.Contract(ERC20, tokenObject.address));
         workers.push({token: new web3.eth.Contract(ERC20, tokenObject.address), isBusy: false});
     }
 
-    const balances = await distributeTasks(web3, workers, contractList);
+    const balances = await distributeTasks(workers, contractList);
     // console.dir(balances);
 
     const records = []
-    // let promises = []
-    // let counter = 0;
-    // const balances = []
-    //
-    // // iterate contracts
-    // let token = tokens[0];
-    //
-    // const arrayLength = tokens.length;
-    // for (const address of contractList) {
-    //     counter++
-    //     promises.push(this.getBalanceOf(token, address))
-    //     // process batch of async requests
-    //
-    //     const idx = counter % arrayLength;
-    //     token = tokens[idx];
-    //
-    //     if (counter % (asyncProcsNumber * arrayLength) === 0) {
-    //         balances.push(...await Promise.all(promises));
-    //         promises = [];
-    //         // console.log(`reset counter: ${counter}`);
-    //         counter = 0;
-    //         // token = tokens[0];
-    //     }
-    // }
-    // if (promises.length) {
-    //     balances.push(...await Promise.all(promises))
-    // }
 
 
     // format acquired balances
