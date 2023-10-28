@@ -1,6 +1,8 @@
 const { ERC20, ERC20n, rpcMap, ethRpcArray} = require('./const');
 const { Web3 } = require('web3');
 
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+
 // how many concurrent requests to make - different node may limit number of incoming requests - so 20 is a good compromise
 // const asyncProcsNumber = 5;
 const chains = [...rpcMap.keys()];
