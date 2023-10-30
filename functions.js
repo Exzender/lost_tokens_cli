@@ -16,7 +16,7 @@ function checkEthAddress(web3, address) {
         return false;
     }
 }
-
+//
 function parseAddress(web3, address) {
     const result = [];
     const list = address.split(/\n|;|,|;\n|,\n/)
@@ -151,6 +151,15 @@ async function getBalanceOf (token, address){
     })
 }
 
+
+/**
+ * Distributes tasks to workers in a round-robin fashion.
+ * @async
+ * @function distributeTasks
+ * @param {Array} workers - An array of worker objects.
+ * @param {Array} contractList - An array of contract objects to be distributed.
+ * @returns {Promise<Array>} - A promise that resolves to an array of completed tasks.
+ */
 async function distributeTasks(workers, contractList) {
     const taskQueue = [...contractList]; // Copy of the original tasks array.
     const completedTasks = [];
@@ -171,7 +180,13 @@ async function distributeTasks(workers, contractList) {
     return await Promise.all(completedTasks);
 }
 
-// Function to find the first available worker.
+/**
+ * Finds the index of the first available worker in an array of worker objects.
+ * @async
+ * @function findAvailableWorker
+ * @param {Array} workers - An array of worker objects.
+ * @returns {Promise<number>} - A promise that resolves to the index of the first available worker.
+ */
 async function findAvailableWorker(workers) {
     return new Promise((resolve) => {
         const checkAvailability = () => {
@@ -188,7 +203,15 @@ async function findAvailableWorker(workers) {
     });
 }
 
-// Simulate task execution based on worker speed (you need to implement the actual task execution logic).
+
+/**
+ * Executes a task by assigning it to a worker and getting the balance of an Ethereum address using the worker's token.
+ * @async
+ * @function executeTask
+ * @param {Object} worker - A worker object.
+ * @param {string} address - An Ethereum address.
+ * @returns {Promise<number>} - A promise that resolves to the balance of the Ethereum address.
+ */
 async function executeTask(worker, address) {
     return new Promise((resolve) => {
         worker.isBusy = true;
@@ -247,6 +270,16 @@ async function findBalances(web3, contractList, tokenObject) {
     return records
 }
 
+
+/**
+ * Processes a single token by getting its information, finding its balances, and formatting the results.
+ * @async
+ * @function processOneToken
+ * @param {Object} web3 - A Web3.js instance.
+ * @param {Array} contractList - An array of contract objects.
+ * @param {string} tokenAddress - The address of the token to be processed.
+ * @returns {Promise<Object>} - A promise that resolves to an object containing the processed token information.
+ */
 async function processOneToken(web3, contractList, tokenAddress) {
     const tokenObject = await getTokenInfo(web3, tokenAddress)
 
@@ -262,17 +295,6 @@ async function processOneToken(web3, contractList, tokenAddress) {
         }
     }
 
-    // NOTE decided to find lost tokens even if there are no known price
-    // if (tokenObject.price === 0) {
-    //     return {
-    //         tokenAddress,
-    //         ticker: tokenObject.ticker,
-    //         decimals: tokenObject.decimals,
-    //         price: -1, // no price
-    //         records: []
-    //     }
-    // }
-
     const results = await findBalances(web3, contractList, tokenObject);
 
     return {
@@ -284,6 +306,13 @@ async function processOneToken(web3, contractList, tokenAddress) {
     }
 }
 
+
+/**
+ * Formats the result of a token balance check.
+ * @function formatTokenResult
+ * @param {Object} res - An object containing the result of a token balance check.
+ * @returns {Object} - An object containing the formatted result string and the value in dollars.
+ */
 function formatTokenResult(res) {
     let localStr = ''
 
