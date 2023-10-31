@@ -1,4 +1,5 @@
-const { ERC20, ERC20n, rpcMap, ethRpcArray} = require('./const');
+const { ERC20, ERC20n, rpcMap, ethRpcArray,
+    excludedMap } = require('./const');
 const { Web3 } = require('web3');
 
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
@@ -283,6 +284,18 @@ async function findBalances(web3, contractList, tokenObject) {
 async function processOneToken(web3, contractList, tokenAddress) {
     const tokenObject = await getTokenInfo(web3, tokenAddress)
 
+    let localList = [...contractList];
+
+    // exclude unneeded contracts
+    if (excludedMap.has(tokenAddress)) {
+        const excluded = excludedMap.get(tokenAddress);
+        for (let ex of excluded) {
+            const index = localList.indexOf(ex);
+            if (index > -1) { // only splice array when item is found
+                localList.splice(index, 1); // 2nd parameter means remove one item only
+            }
+        }
+    }
     // console.dir(tokenObject);
 
     if (!tokenObject.valid) {
@@ -295,7 +308,7 @@ async function processOneToken(web3, contractList, tokenAddress) {
         }
     }
 
-    const results = await findBalances(web3, contractList, tokenObject);
+    const results = await findBalances(web3, localList, tokenObject);
 
     return {
         tokenAddress,

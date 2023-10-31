@@ -24,7 +24,7 @@ const eth_tokens = [
     '0xc944e90c64b2c07662a292be6244bdf05cda44a7',
     '0x85f17cf997934a597031b2e18a9ab6ebd4b9f6a4',
     '0xd850942ef8811f2a866692a623011bde52a462c1',
-    // '0x4a220e6096b25eadb88358cb44068a3248254675', // QNT  ~ 800 mln
+    '0x4a220e6096b25eadb88358cb44068a3248254675', // QNT  ~ 800 mln
     '0x3845badAde8e6dFF049820680d1F14bD3903a5d0',
     '0x4d224452801aced8b2f0aebe155379bb5d594381',
     '0x1a4b46696b2bb4794eb3d4c26f1c55f9170fa4c5',
@@ -55,6 +55,7 @@ const eth_tokens = [
     '0x6c6ee5e31d828de241282b9606c8e98ea48526e2',
     '0x0bc529c00C6401aEF6D220BE8C6Ea1667F6Ad93e',
     '0x0d8775f648430679a709e98d2b0cb6250d2887ef',
+    '0x80fB784B7eD66730e8b1DBd9820aFD29931aab03',
     '0x6810e776880c02933d47db1b9fc05908e5386b96'
 ]
 
@@ -63,7 +64,8 @@ const eth_contracts = [
     '0x80fB784B7eD66730e8b1DBd9820aFD29931aab03',
     '0x4a220e6096b25eadb88358cb44068a3248254675',
     '0x622dFfCc4e83C64ba959530A5a5580687a57581b',
-    '0x543ff227f64aa17ea132bf9886cab5db55dcaddf'
+    '0x543ff227f64aa17ea132bf9886cab5db55dcaddf',
+    '0x8a854288a5976036a725879164ca3e91d30c6a1b'
 ]
 
 const bsc_tokens = [
@@ -165,8 +167,13 @@ const ethRpcArray = [
     // 'https://mainnet.gateway.tenderly.co', // bad // disabled x2
 ]
 
+const excludedMap = new Map([
+    ['0x4a220e6096b25eadb88358cb44068a3248254675', ['0x4a220e6096b25eadb88358cb44068a3248254675']], // QNT
+    ['0x80fB784B7eD66730e8b1DBd9820aFD29931aab03', ['0x80fB784B7eD66730e8b1DBd9820aFD29931aab03']]  // LEND
+])
+
 // export const ERC20
 const ERC20 = [{"constant":true,"inputs":[],"name":"ticker","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"}],"name":"approve","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"spender","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Transfer","type":"event"}]
 const ERC20n = [{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"bytes32"}],"payable":false,"type":"function"}]
 
-module.exports = { ERC20, ERC20n, rpcMap, tokens, contracts, ethRpcArray }
+module.exports = { ERC20, ERC20n, rpcMap, tokens, contracts, ethRpcArray, excludedMap }
