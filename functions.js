@@ -134,7 +134,8 @@ async function getTokenInfo(web3, contractAddress) {
         ticker,
         valid: validToken,
         decimals: Number(decimals) || 18,
-        price: priceObj['price'] ?? priceObj['USD'] ?? 0
+        price: priceObj['price'] ?? priceObj['USD'] ?? 0,
+        logo: priceObj.logo
     }
 }
 
@@ -287,15 +288,15 @@ async function processOneToken(web3, contractList, tokenAddress) {
     let localList = [...contractList];
 
     // exclude unneeded contracts
-    if (excludedMap.has(tokenAddress)) {
-        const excluded = excludedMap.get(tokenAddress);
-        for (let ex of excluded) {
-            const index = localList.indexOf(ex);
-            if (index > -1) { // only splice array when item is found
-                localList.splice(index, 1); // 2nd parameter means remove one item only
-            }
-        }
-    }
+    // if (excludedMap.has(tokenAddress)) {
+    //     const excluded = excludedMap.get(tokenAddress);
+    //     for (let ex of excluded) {
+    //         const index = localList.indexOf(ex);
+    //         if (index > -1) { // only splice array when item is found
+    //             localList.splice(index, 1); // 2nd parameter means remove one item only
+    //         }
+    //     }
+    // }
     // console.dir(tokenObject);
 
     if (!tokenObject.valid) {
@@ -310,11 +311,22 @@ async function processOneToken(web3, contractList, tokenAddress) {
 
     const results = await findBalances(web3, localList, tokenObject);
 
+    // mark excluded results
+    if (excludedMap.has(tokenAddress)) {
+        const excluded = excludedMap.get(tokenAddress);
+        for (let item of results) {
+            if (excluded.includes(item.contract)) {
+                item.exclude = true;
+            }
+        }
+    }
+
     return {
         tokenAddress,
         ticker: tokenObject.ticker,
         decimals: tokenObject.decimals,
         price: tokenObject.price,
+        logo: tokenObject.logo,
         records: results
     }
 }
@@ -330,11 +342,11 @@ function formatTokenResult(res) {
     let localStr = ''
 
     if (!res.ticker) { // invalid token
-        return { resStr : `??? [${res.tokenAddress}] - unknown token\n`, asDollar: 0 }
+        return { resStr : `??? [${res.tokenAddress}] - unknown token\n`, asDollar: 0, amount: 0 }
     }
 
     if (res.price === -1) { // can't get price
-        return { resStr : `${res.ticker} [${res.tokenAddress}]: not checked - no price found\n`, asDollar: 0 }
+        return { resStr : `${res.ticker} [${res.tokenAddress}]: not checked - no price found\n`, asDollar: 0, amount: 0 }
     }
 
     // normal process
@@ -342,8 +354,13 @@ function formatTokenResult(res) {
 
     // records already sorted by value - formatting output
     for (const record of res.records) {
-        const str = `Contract ${record.contract} => ${numberWithCommas(record.roundedAmount)} ${res.ticker} ( $${record.dollarValue} )`
-        sum += record.amount
+        let prefix = '';
+        if (record.exclude) {
+            prefix = '[X] ';
+        } else {
+            sum += record.amount;
+        }
+        const str = `Contract ${prefix}${record.contract} => ${numberWithCommas(record.roundedAmount)} ${res.ticker} ( $${record.dollarValue} )`
         localStr += str + '\n'
     }
 
@@ -354,7 +371,7 @@ function formatTokenResult(res) {
     const header = `${res.ticker} [${res.tokenAddress}]: ${numberWithCommas(roundedAmount)} tokens lost / $${numberWithCommas(asDollar)}`
     localStr = header + '\n-----------------------------------------------\n' + localStr
 
-    return { resStr: localStr, asDollar }
+    return { resStr: localStr, asDollar, amount: roundedAmount }
 }
 
 module.exports = {

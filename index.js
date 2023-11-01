@@ -67,7 +67,8 @@ const CONTRACTS_FILE = process.env.CONTRACTS_FILE || 'eth_contracts_list.txt';
         wholeSum += formatted.asDollar;
         resultsArray.push({
             ...res,
-            asDollar: formatted.asDollar
+            asDollar: formatted.asDollar,
+            amount: formatted.amount
         });
 
         counter++;
