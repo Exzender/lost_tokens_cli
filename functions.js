@@ -67,7 +67,22 @@ async function getTokenInfo(web3, contractAddress) {
         console.log(`"symbol" ticker: ${ticker}`)
         validToken = true;
     } catch (e) {
-        // console.error(e);
+        console.error('error getting token symbol');
+    }
+
+    if (!ticker) { // retry with another node
+        if (rpcMap.has(`${chain}2`)) {
+            const rpc2 = rpcMap.get(`${chain}2`);
+            const web3provider = new Web3(rpc2);
+            const token2 = new web3provider.eth.Contract(ERC20, contractAddress);
+            try {
+                ticker = await token2.methods.symbol().call({data: '0x1'}); // ticker
+                console.log(`"2nd token symbol" ticker: ${ticker}`)
+                validToken = true;
+            } catch (e) {
+                console.error('error getting token  symbol 2nd try');
+            }
+        }
     }
 
     if (!ticker) {
@@ -144,12 +159,15 @@ async function getTokenInfo(web3, contractAddress) {
  *
  * @param {Token} token - The token contract instance.
  * @param {string} address - The address for which to retrieve the balance.
+ * @param {number} iteration - Limit number of retries .
  * @return {Promise<number>} A promise that resolves to the balance of the address.
  */
-async function getBalanceOf (token, address){
+async function getBalanceOf (token, address, iteration){
+    // console.log(`getBalance: ${address} | ${iteration}`);
+    if (iteration > 1) return -1;
     return await token.methods.balanceOf(address).call({data: '0x1'}).catch(async () => {
-        console.error(`balanceOf error: ${token._requestManager._provider.clientUrl}`);
-        return await getBalanceOf(token, address);
+        console.error(`balanceOf error: ${token._requestManager._provider.clientUrl} | ${address} | ${iteration}`);
+        return await getBalanceOf(token, address, ++iteration);
     })
 }
 
@@ -166,20 +184,67 @@ async function distributeTasks(workers, contractList) {
     const taskQueue = [...contractList]; // Copy of the original tasks array.
     const completedTasks = [];
 
-    while (taskQueue.length > 0) {
+    async function processTask() {
+        if (taskQueue.length === 0) {
+            return;
+        }
+
+        // while (taskQueue.length > 0) {
         // Find the first available worker.
         const availableWorkerIndex = await findAvailableWorker(workers);
-
         if (availableWorkerIndex !== -1) {
+
             // Assign the next task to the available worker.
             const task = taskQueue.shift();
+            if (!task) return;
+            // console.log(`Processing: ${task}`);
             const worker = workers[availableWorkerIndex];
+            // console.log(`at: ${worker.token._requestManager._provider.clientUrl}`);
 
-            completedTasks.push(executeTask(worker, task));
+            const result = executeTask(worker, task);
+
+            result.then((taskResult) => {
+                if (taskResult === -1) {
+                    // Task failed, reassign it to the next available worker.
+                    console.log(`Reassigning task: ${task}`);
+                    taskQueue.push(task);
+                } else {
+                    completedTasks.push({address: task, balance: taskResult});
+                }
+
+                // Process the next task.
+                processTask();
+            });
         }
+        // }
     }
 
-    return await Promise.all(completedTasks);
+    while (taskQueue.length || !getWorkersStatus(workers)) {
+        // console.log(completedTasks.length);
+        await processTask();
+        await sleep(50);
+    }
+
+    // console.log(`Completed: ${completedTasks.length}`);
+
+    // return await Promise.all(completedTasks);
+    return completedTasks;
+}
+
+function getWorkersStatus(workers) {
+    for (let worker of workers) {
+        if (worker.isBusy && !worker.isDead) {
+            // console.log(`Busy worker: ${worker.token._requestManager._provider.clientUrl} | ${worker.isBusy} | ${worker.isDead}`);
+            return false;
+        }
+    }
+    return true;
+}
+
+function sleep(ms) {
+    return new Promise((resolve) => {
+        setTimeout(resolve, ms);
+    });
 }
 
 /**
@@ -192,7 +257,7 @@ async function distributeTasks(workers, contractList) {
 async function findAvailableWorker(workers) {
     return new Promise((resolve) => {
         const checkAvailability = () => {
-            const index = workers.findIndex(worker => !worker.isBusy);
+            const index = workers.findIndex(worker => !(worker.isBusy || worker.isDead));
 
             if (index !== -1) {
                 resolve(index);
@@ -218,11 +283,19 @@ async function executeTask(worker, address) {
     return new Promise((resolve) => {
         worker.isBusy = true;
         // console.time(`getBalances: ${worker.token._requestManager._provider.clientUrl} ${address}`);
-        getBalanceOf(worker.token, address).then((balance) => {
-            worker.isBusy = false;
-            // console.timeEnd(`getBalances: ${worker.token._requestManager._provider.clientUrl} ${address}`);
-            resolve(balance);
-        });
+        getBalanceOf(worker.token, address, 0)
+            .then((balance) => {
+                // console.log(`balance: ${balance}`);
+                if (balance < 0) {
+                    worker.isDead = true;
+                    resolve(balance);
+                    console.error(`dead worker: ${worker.token._requestManager._provider.clientUrl}`);
+                    return;
+                }
+                worker.isBusy = false;
+                // console.timeEnd(`getBalances: ${worker.token._requestManager._provider.clientUrl} ${address}`);
+                resolve(balance);
+            });
     });
 }
 
@@ -240,10 +313,10 @@ async function findBalances(web3, contractList, tokenObject) {
     if (chain === 'eth') {
         for (const rpc of ethRpcArray) {
             const web3provider = new Web3(rpc);
-            workers.push({token: new web3provider.eth.Contract(ERC20, tokenObject.address), isBusy: false});
+            workers.push({token: new web3provider.eth.Contract(ERC20, tokenObject.address), isBusy: false, isDead: false});
         }
     } else {
-        workers.push({token: new web3.eth.Contract(ERC20, tokenObject.address), isBusy: false});
+        workers.push({token: new web3.eth.Contract(ERC20, tokenObject.address), isBusy: false, isDead: false});
     }
 
     const balances = await distributeTasks(workers, contractList);
@@ -254,14 +327,14 @@ async function findBalances(web3, contractList, tokenObject) {
 
     // format acquired balances
     for (let i = 0; i < balances.length; i++) {
-        if (balances[i] > 0n) {
-            const amount = Number(balances[i] / BigInt(Number(`1e${tokenObject.decimals}`)))
+        if (balances[i].balance > 0n) {
+            const amount = Number(balances[i].balance / BigInt(Number(`1e${tokenObject.decimals}`)))
             const dollarValue = numberWithCommas(amount * tokenObject.price)
             records.push({
-                amount: BigInt(balances[i]),
+                amount: BigInt(balances[i].balance),
                 roundedAmount: amount,
                 dollarValue,
-                contract: contractList[i]
+                contract: balances[i].address
             })
         }
     }
@@ -286,18 +359,6 @@ async function processOneToken(web3, contractList, tokenAddress) {
     const tokenObject = await getTokenInfo(web3, tokenAddress)
 
     let localList = [...contractList];
-
-    // exclude unneeded contracts
-    // if (excludedMap.has(tokenAddress)) {
-    //     const excluded = excludedMap.get(tokenAddress);
-    //     for (let ex of excluded) {
-    //         const index = localList.indexOf(ex);
-    //         if (index > -1) { // only splice array when item is found
-    //             localList.splice(index, 1); // 2nd parameter means remove one item only
-    //         }
-    //     }
-    // }
-    // console.dir(tokenObject);
 
     if (!tokenObject.valid) {
         return {
