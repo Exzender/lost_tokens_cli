@@ -169,7 +169,7 @@ async function getBalanceOf (token, address, iteration){
     const timeout = 4000;
 
     const task = token.methods.balanceOf(address).call({data: '0x1'}).catch(async () => {
-        console.error(`balanceOf error: ${token._requestManager._provider.clientUrl} | ${address} | ${iteration}`);
+        // console.error(`balanceOf error: ${token._requestManager._provider.clientUrl} | ${address} | ${iteration}`);
         return await getBalanceOf(token, address, ++iteration);
     })
 
@@ -247,7 +247,7 @@ function getWorkersStatus(workers) {
     return true;
 }
 
-function sleep(ms) {
+async function sleep(ms) {
     return new Promise((resolve) => {
         setTimeout(() => resolve(-1), ms);
     });
