@@ -165,10 +165,16 @@ async function getTokenInfo(web3, contractAddress) {
 async function getBalanceOf (token, address, iteration){
     // console.log(`getBalance: ${address} | ${iteration}`);
     if (iteration > 1) return -1;
-    return await token.methods.balanceOf(address).call({data: '0x1'}).catch(async () => {
+
+    const timeout = 4000;
+
+    const task = token.methods.balanceOf(address).call({data: '0x1'}).catch(async () => {
         console.error(`balanceOf error: ${token._requestManager._provider.clientUrl} | ${address} | ${iteration}`);
         return await getBalanceOf(token, address, ++iteration);
     })
+
+    const waitPromise = sleep(timeout);
+    return  Promise.race([waitPromise, task]);
 }
 
 
@@ -243,7 +249,7 @@ function getWorkersStatus(workers) {
 
 function sleep(ms) {
     return new Promise((resolve) => {
-        setTimeout(resolve, ms);
+        setTimeout(() => resolve(-1), ms);
     });
 }
 
