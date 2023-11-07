@@ -1,4 +1,37 @@
-WHOLE SUM: $243,227,129.63 for 1238 tokens
+WHOLE SUM: $4,100,880,383.12 for 1238 tokens
+
+LEND [0x80fB784B7eD66730e8b1DBd9820aFD29931aab03]: 1,265,599,554.09 tokens lost / $1,612,373,831.91
+-----------------------------------------------
+Contract 0x80fB784B7eD66730e8b1DBd9820aFD29931aab03 => 1,265,594,096 LEND ( $1,612,366,878.30 )
+Contract 0x595832f8fc6bf59c85c527fec3740a1b7a361269 => 1,978 LEND ( $2,519.97 )
+Contract 0x1f9840a85d5af5bf1d1762f925bdaddc4201f984 => 1,664 LEND ( $2,119.93 )
+Contract 0xfca59cd816ab1ead66534d82bc21e7515ce441cf => 1,456 LEND ( $1,854.94 )
+Contract 0xb056c38f6b7dc4064367403e26424cd2c60655e1 => 358 LEND ( $456.09 )
+
+QNT [0x4a220e6096b25eadb88358cb44068a3248254675]: 9,550,626.74 tokens lost / $984,605,690.44
+-----------------------------------------------
+Contract 0x4a220e6096b25eadb88358cb44068a3248254675 => 9,550,444 QNT ( $984,586,850.73 )
+Contract 0x8a854288a5976036a725879164ca3e91d30c6a1b => 138 QNT ( $14,226.87 )
+Contract 0x967da4048cD07aB37855c090aAF366e4ce1b9F48 => 30 QNT ( $3,092.79 )
+Contract 0x3506424f91fd33084466f402d5d97f05f8e3b4af => 6 QNT ( $618.55 )
+Contract 0xc18360217d8f7ab5e7c516566761ea12ce7f9d72 => 3 QNT ( $309.27 )
+Contract 0x28c8d01ff633ea9cd8fc6a451d7457889e698de6 => 2 QNT ( $206.18 )
+
+frxETH [0x5e8422345238f34275888049021821e8e08caa1f]: 206,447.74 tokens lost / $378,630,310.22
+-----------------------------------------------
+Contract 0xac3e018457b222d93114458476f3e3416abbe38f => 206,447 frxETH ( $378,628,941.38 )
+
+AUTO [0x622dFfCc4e83C64ba959530A5a5580687a57581b]: 7,960,350.90 tokens lost / $166,689,748.01
+-----------------------------------------------
+Contract 0x622dFfCc4e83C64ba959530A5a5580687a57581b => 7,960,350 AUTO ( $166,689,729 )
+
+DEXE [0xde4EE8057785A7e8e800Db58F9784845A5C2Cbd6]: 60,004,552.10 tokens lost / $143,681,920.01
+-----------------------------------------------
+Contract 0xde4EE8057785A7e8e800Db58F9784845A5C2Cbd6 => 60,004,552 DEXE ( $143,681,919.76 )
+
+NXM [0xd7c49cee7e9188cca6ad8ff264c1da2e69d4cf3b]: 2,390,152.52 tokens lost / $136,319,795.20
+-----------------------------------------------
+Contract 0x0d438f3b5175bebc262bf23753c1e53d03432bde => 2,390,152 NXM ( $136,319,765.26 )
 
 SPELL [0x090185f2135308bad17527004364ebcc2d37e5f6]: 224,091,267,520.41 tokens lost / $115,650,057.83
 -----------------------------------------------
@@ -14,110 +47,71 @@ Contract 0xaf5191b0de278c7286d6c7cc6ab6bb8a73ba2cd6 => 147,750,994 STG ( $70,508
 Contract 0x940a2db1b7008b6c776d4faaca729d6d4a4aa551 => 2,900 STG ( $1,383.90 )
 Contract 0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0 => 30 STG ( $14.31 )
 
-BAO [0x374cb8c27130e2c9e04f44303f3c8351b9de61c1]: 828,200,107,407.02 tokens lost / $21,968,147.49
+RPL [0xd33526068d116ce69f19a9ee46f0bd304f21a51f]: 2,806,029.20 tokens lost / $66,404,448.60
 -----------------------------------------------
-Contract 0x374cb8c27130e2c9e04f44303f3c8351b9de61c1 => 828,200,107,407 BAO ( $21,968,147.49 )
+Contract 0xd33526068d116ce69f19a9ee46f0bd304f21a51f => 2,806,029 RPL ( $66,404,443.86 )
 
-BNB [0xB8c77482e45F1F44dE1745F52C74426C631bDD52]: 23,533.75 tokens lost / $5,436,420.87
+QANX [0xaaa9214f675316182eaa21c85f0ca99160cc3aaa]: 2,722,474,009.32 tokens lost / $62,999,974.08
 -----------------------------------------------
-Contract 0xB8c77482e45F1F44dE1745F52C74426C631bDD52 => 23,529 BNB ( $5,435,323.35 )
-Contract 0x4fabb145d64652a948d72533023f6e7a623c7c53 => 2 BNB ( $462.01 )
-Contract 0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48 => 0.00 BNB ( $0.00 )
-Contract 0xf629cbd94d3791c9250152bd8dfbdf380e2a3b9c => 0.00 BNB ( $0.00 )
-Contract 0x152649eA73beAb28c5b49B26eb48f7EAD6d4c898 => 0.00 BNB ( $0.00 )
-Contract 0x80fB784B7eD66730e8b1DBd9820aFD29931aab03 => 0.00 BNB ( $0.00 )
-Contract 0xb6ed7644c69416d67b522e20bc294a9a9b405b31 => 0.00 BNB ( $0.00 )
-Contract 0x4CF488387F035FF08c371515562CBa712f9015d4 => 0.00 BNB ( $0.00 )
-Contract 0x41dbecc1cdc5517c6f76f6a6e836adbee2754de3 => 0.00 BNB ( $0.00 )
-Contract 0x146d8d942048ad517479c9bab1788712af180fde => 0.00 BNB ( $0.00 )
+Contract 0xaaa9214f675316182eaa21c85f0ca99160cc3aaa => 2,722,474,009 QANX ( $62,999,974.07 )
 
-RNDR [0x6de037ef9ad2725eb40118bb1702ebb27e4aeb24]: 1,032,900.87 tokens lost / $2,536,065.41
+DAI [0x6b175474e89094c44da98b954eedeac495271d0f]: 59,248,881.89 tokens lost / $59,268,446.56
 -----------------------------------------------
-Contract 0x6de037ef9ad2725eb40118bb1702ebb27e4aeb24 => 1,032,084 RNDR ( $2,534,059.76 )
-Contract 0xB8c77482e45F1F44dE1745F52C74426C631bDD52 => 600 RNDR ( $1,473.17 )
-Contract 0xe28b3B32B6c345A34Ff64674606124Dd5Aceca30 => 154 RNDR ( $378.11 )
-Contract 0x3d658390460295fb963f54dc0899cfb1c30776df => 41 RNDR ( $100.66 )
-Contract 0x514910771af9ca656af840dff83e8264ecf986ca => 20 RNDR ( $49.10 )
+Contract 0x5d3a536E4D6DbD6114cc1Ead35777bAB948E3643 => 58,499,534 DAI ( $58,518,851.22 )
+Contract 0x6b175474e89094c44da98b954eedeac495271d0f => 693,034 DAI ( $693,262.84 )
+Contract 0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0 => 35,000 DAI ( $35,011.55 )
+Contract 0x83e9f223e1edb3486f876ee888d76bfba26c475a => 2,009 DAI ( $2,009.66 )
+Contract 0xf650c3d88d12db855b8bf7d11be6c55a4e07dcc9 => 1,986 DAI ( $1,986.65 )
+Contract 0xf3dcbc6d72a4e1892f7917b7c43b74131df8480e => 1,844 DAI ( $1,844.60 )
+Contract 0x6b3595068778dd592e39a122f4f5a5cf09c90fe2 => 1,698 DAI ( $1,698.56 )
+Contract 0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48 => 1,561 DAI ( $1,561.51 )
+Contract 0x2b591e99afe9f32eaa6214f7b7629768c40eeb39 => 1,427 DAI ( $1,427.47 )
+Contract 0x57ab1ec28d129707052df4df418d58a2d46d5f51 => 1,415 DAI ( $1,415.46 )
+Contract 0xa3BeD4E1c75D00fa6f4E5E6922DB7261B5E9AcD2 => 1,170 DAI ( $1,170.38 )
+Contract 0x36F3FD68E7325a35EB768F1AedaAe9EA0689d723 => 787 DAI ( $787.25 )
+Contract 0x0cec1a9154ff802e7934fc916ed7ca50bde6844e => 718 DAI ( $718.23 )
+Contract 0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359 => 703 DAI ( $703.23 )
+Contract 0xac3211a5025414af2866ff09c23fc18bc97e79b1 => 700 DAI ( $700.23 )
+Contract 0xf5581dfefd8fb0e4aec526be659cfab1f8c781da => 626 DAI ( $626.20 )
+Contract 0xaea46A60368A7bD060eec7DF8CBa43b7EF41Ad85 => 511 DAI ( $511.16 )
+Contract 0x4c327471C44B2dacD6E90525f9D629bd2e4f662C => 500 DAI ( $500.16 )
+Contract 0x24da31e7bb182cb2cabfef1d88db19c2ae1f5572 => 500 DAI ( $500.16 )
+Contract 0x0bc529c00C6401aEF6D220BE8C6Ea1667F6Ad93e => 483 DAI ( $483.15 )
+Contract 0x06450dEe7FD2Fb8E39061434BAbCFC05599a6Fb8 => 442 DAI ( $442.14 )
+Contract 0x767fe9edc9e0df98e07454847909b5e959d7ca0e => 330 DAI ( $330.10 )
+Contract 0x6b1a8f210ec6b7b6643cea3583fb0c079f367898 => 305 DAI ( $305.10 )
+Contract 0x85eee30c52b0b379b046fb0f85f4f3dc3009afec => 300 DAI ( $300.09 )
+Contract 0x21bfbda47a0b4b5b1248c767ee49f7caa9b23697 => 247 DAI ( $247.08 )
+Contract 0x1ceb5cb57c4d4e2b2433641b95dd330a33185a44 => 200 DAI ( $200.06 )
+Contract 0x58b6a8a3302369daec383334672404ee733ab239 => 197 DAI ( $197.06 )
+Contract 0x2260fac5e5542a773aa44fbcfedf7c193bc2c599 => 137 DAI ( $137.04 )
+Contract 0xa0b73e1ff0b80914ab6fe0444e65848c4c34450b => 111 DAI ( $111.03 )
+Contract 0xc00e94cb662c3520282e6f5717214004a7f26888 => 100 DAI ( $100.03 )
+Contract 0x761d38e5ddf6ccf6cf7c55759d5210750b5d60f3 => 49 DAI ( $49.01 )
+Contract 0x3affcca64c2a6f4e3b6bd9c64cd2c969efd1ecbe => 49 DAI ( $49.01 )
+Contract 0xdac17f958d2ee523a2206206994597c13d831ec7 => 39 DAI ( $39.01 )
+Contract 0x491604c0FDF08347Dd1fa4Ee062a822A5DD06B5D => 31 DAI ( $31.01 )
+Contract 0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE => 27 DAI ( $27.00 )
+Contract 0x1f9840a85d5af5bf1d1762f925bdaddc4201f984 => 24 DAI ( $24.00 )
+Contract 0xaaaebe6fe48e54f431b0c390cfaf0b017d09d42d => 24 DAI ( $24.00 )
+Contract 0x054D64b73d3D8A21Af3D764eFd76bCaA774f3Bb2 => 14 DAI ( $14.00 )
+Contract 0x19062190b1925b5b6689d7073fdfc8c2976ef8cb => 12 DAI ( $12.00 )
+Contract 0x0Ae055097C6d159879521C384F1D2123D1f195e6 => 10 DAI ( $10.00 )
+Contract 0x0d8775f648430679a709e98d2b0cb6250d2887ef => 5 DAI ( $5.00 )
+Contract 0x7bef710a5759d197ec0bf621c3df802c2d60d848 => 5 DAI ( $5.00 )
+Contract 0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2 => 0.00 DAI ( $0.00 )
+Contract 0x4ddc2d193948926d02f9b1fe9e1daa0718270ed5 => 0.00 DAI ( $0.00 )
+Contract 0x39aa39c021dfbae8fac545936693ac917d5e7563 => 0.00 DAI ( $0.00 )
+Contract 0xcf3c8be2e2c42331da80ef210e9b1b307c03d36a => 0.00 DAI ( $0.00 )
+Contract 0x990f341946A3fdB507aE7e52d17851B87168017c => 0.00 DAI ( $0.00 )
 
-GENE [0x6dd4e4aad29a40edd6a409b9c1625186c9855b4d]: 14,633,775.19 tokens lost / $2,391,158.86
+ATA [0xa2120b9e674d3fc3875f415a7df52e382f141225]: 546,511,102.89 tokens lost / $49,773,451.33
 -----------------------------------------------
-Contract 0x6dd4e4aad29a40edd6a409b9c1625186c9855b4d => 14,633,775 GENE ( $2,391,158.83 )
+Contract 0xa2120b9e674d3fc3875f415a7df52e382f141225 => 546,511,102 ATA ( $49,773,451.25 )
 
-SHIB [0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE]: 242,732,370,033.81 tokens lost / $1,939,882.33
+USDT [0xdac17f958d2ee523a2206206994597c13d831ec7]: 48,792,054.25 tokens lost / $48,798,720.85
 -----------------------------------------------
-Contract 0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE => 241,423,543,312 SHIB ( $1,929,422.38 )
-Contract 0x761d38e5ddf6ccf6cf7c55759d5210750b5d60f3 => 334,035,961 SHIB ( $2,669.56 )
-Contract 0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48 => 163,283,668 SHIB ( $1,304.93 )
-Contract 0x0f5d2fb29fb7d3cfee444a200298f468908cc942 => 161,530,644 SHIB ( $1,290.92 )
-Contract 0x1f9840a85d5af5bf1d1762f925bdaddc4201f984 => 115,727,770 SHIB ( $924.87 )
-Contract 0xdac17f958d2ee523a2206206994597c13d831ec7 => 73,323,602 SHIB ( $585.99 )
-Contract 0x2b591e99afe9f32eaa6214f7b7629768c40eeb39 => 67,957,535 SHIB ( $543.10 )
-Contract 0x48c276e8d03813224bb1e55f953adb6d02fd3e02 => 60,041,559 SHIB ( $479.84 )
-Contract 0xcd7492db29e2ab436e819b249452ee1bbdf52214 => 35,495,932 SHIB ( $283.67 )
-Contract 0xf411903cbc70a74d22900a5de66a2dda66507255 => 35,134,481 SHIB ( $280.78 )
-Contract 0x6982508145454ce325ddbe47a25d4ec3d2311933 => 31,199,397 SHIB ( $249.34 )
-Contract 0xf293d23bf2cdc05411ca0eddd588eb1977e8dcd4 => 29,952,876 SHIB ( $239.37 )
-Contract 0x549020a9Cb845220D66d3E9c6D9F9eF61C981102 => 27,184,628 SHIB ( $217.25 )
-Contract 0xc18360217d8f7ab5e7c516566761ea12ce7f9d72 => 24,129,520 SHIB ( $192.83 )
-Contract 0x155040625d7ae3e9cada9a73e3e44f76d3ed1409 => 21,237,311 SHIB ( $169.72 )
-Contract 0x60f5672a271c7e39e787427a18353ba59a4a3578 => 19,356,323 SHIB ( $154.69 )
-Contract 0x226bb599a12c826476e3a771454697ea52e9e220 => 13,000,000 SHIB ( $103.89 )
-Contract 0x243cacb4d5ff6814ad668c3e225246efa886ad5a => 11,615,112 SHIB ( $92.82 )
-Contract 0x0e69d0a2bbb30abcb7e5cfea0e4fde19c00a8d47 => 10,936,210 SHIB ( $87.40 )
-Contract 0x4f9254c83eb525f9fcf346490bbb3ed28a81c667 => 10,614,732 SHIB ( $84.83 )
-Contract 0x846c66cf71c43f80403b51fe3906b3599d63336f => 10,000,000 SHIB ( $79.91 )
-Contract 0x49642110b712c1fd7261bc074105e9e44676c68f => 8,941,636 SHIB ( $71.46 )
-Contract 0x2BA8349123de45E931a8C8264c332E6e9CF593F9 => 8,862,876 SHIB ( $70.83 )
-Contract 0xcf0c122c6b73ff809c693db761e7baebe62b6a2e => 5,532,503 SHIB ( $44.21 )
-Contract 0xa1faa113cbe53436df28ff0aee54275c13b40975 => 4,339,402 SHIB ( $34.67 )
-Contract 0x55296f69f40ea6d20e478533c15a6b08b654e758 => 4,224,149 SHIB ( $33.75 )
-Contract 0x6fc13eace26590b80cccab1ba5d51890577d83b2 => 4,000,000 SHIB ( $31.96 )
-Contract 0x8e6cd950ad6ba651f6dd608dc70e5886b1aa6b24 => 3,359,601 SHIB ( $26.84 )
-Contract 0xff20817765cb7f73d4bde2e66e067e58d11095c2 => 2,664,792 SHIB ( $21.29 )
-Contract 0x05f4a42e251f2d52b8ed15e9fedaacfcef1fad27 => 2,450,093 SHIB ( $19.58 )
-Contract 0x4d224452801aced8b2f0aebe155379bb5d594381 => 2,348,416 SHIB ( $18.76 )
-Contract 0x090185f2135308bad17527004364ebcc2d37e5f6 => 2,051,282 SHIB ( $16.39 )
-Contract 0x4ddc2d193948926d02f9b1fe9e1daa0718270ed5 => 1,377,410 SHIB ( $11.00 )
-Contract 0xed04915c23f00a313a544955524eb7dbd823143d => 830,749 SHIB ( $6.63 )
-Contract 0xc944e90c64b2c07662a292be6244bdf05cda44a7 => 801,603 SHIB ( $6.40 )
-Contract 0x16631e53c20fd2670027c6d53efe2642929b285c => 516,051 SHIB ( $4.12 )
-Contract 0x4fabb145d64652a948d72533023f6e7a623c7c53 => 432,490 SHIB ( $3.45 )
-Contract 0xCE3f08e664693ca792caCE4af1364D5e220827B2 => 334,341 SHIB ( $2.67 )
-Contract 0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0 => 1,000 SHIB ( $0.00 )
-Contract 0xf629cbd94d3791c9250152bd8dfbdf380e2a3b9c => 1,000 SHIB ( $0.00 )
-Contract 0x6b175474e89094c44da98b954eedeac495271d0f => 50 SHIB ( $0.00 )
-
-ZRX [0xe41d2489571d322189246dafa5ebde1f4699f498]: 6,572,686.17 tokens lost / $1,750,851.30
------------------------------------------------
-Contract 0xb3319f5d18bc0d84dd1b4825dcde5d5f7266d407 => 6,275,216 ZRX ( $1,671,610.33 )
-Contract 0xe41d2489571d322189246dafa5ebde1f4699f498 => 284,351 ZRX ( $75,746.24 )
-Contract 0x5732046a883704404f284ce41ffadd5b007fd668 => 5,000 ZRX ( $1,331.91 )
-Contract 0xf970b8e36e23f7fc3fd752eea86f8be8d83375a6 => 2,145 ZRX ( $571.39 )
-Contract 0xeeaa40b28a2d1b0b08f6f97bb1dd4b75316c6107 => 1,211 ZRX ( $322.58 )
-Contract 0xba11d00c5f74255f56a5e366f4f77f5a186d7f55 => 1,142 ZRX ( $304.20 )
-Contract 0xaea46A60368A7bD060eec7DF8CBa43b7EF41Ad85 => 1,000 ZRX ( $266.38 )
-Contract 0x55296f69f40ea6d20e478533c15a6b08b654e758 => 896 ZRX ( $238.67 )
-Contract 0xfa1a856cfa3409cfa145fa4e20eb270df3eb21ab => 465 ZRX ( $123.86 )
-Contract 0xa0b73e1ff0b80914ab6fe0444e65848c4c34450b => 360 ZRX ( $95.89 )
-Contract 0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE => 347 ZRX ( $92.43 )
-Contract 0x1f9840a85d5af5bf1d1762f925bdaddc4201f984 => 191 ZRX ( $50.87 )
-Contract 0xcb97e65f07da24d46bcdd078ebebd7c6e6e3d750 => 159 ZRX ( $42.35 )
-Contract 0x0d8775f648430679a709e98d2b0cb6250d2887ef => 126 ZRX ( $33.56 )
-Contract 0x9992ec3cf6a55b00978cddf2b27bc6882d88d1ec => 49 ZRX ( $13.05 )
-Contract 0x4ddc2d193948926d02f9b1fe9e1daa0718270ed5 => 11 ZRX ( $2.93 )
-Contract 0xfb130d93e49dca13264344966a611dc79a456bc5 => 5 ZRX ( $1.33 )
-Contract 0x446c9033e7516d820cc9a2ce2d0b7328b579406f => 2 ZRX ( $0.53 )
-Contract 0x056fd409e1d7a124bd7017459dfea2f387b6d5cd => 1 ZRX ( $0.26 )
-Contract 0x4575f41308EC1483f3d399aa9a2826d74Da13Deb => 1 ZRX ( $0.26 )
-Contract 0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2 => 0.00 ZRX ( $0.00 )
-
-CARD [0x954b890704693af242613edef1b603825afcd708]: 3,000,688,266.19 tokens lost / $1,734,339.87
------------------------------------------------
-Contract 0x954b890704693af242613edef1b603825afcd708 => 3,000,688,266 CARD ( $1,734,339.87 )
-
-USDT [0xdac17f958d2ee523a2206206994597c13d831ec7]: 1,569,654.87 tokens lost / $1,569,869.33
------------------------------------------------
-Contract [X] 0xf650c3d88d12db855b8bf7d11be6c55a4e07dcc9 => 47,222,399 USDT ( $47,228,851.13 )
+Contract 0xf650c3d88d12db855b8bf7d11be6c55a4e07dcc9 => 47,222,399 USDT ( $47,228,851.13 )
 Contract 0xdac17f958d2ee523a2206206994597c13d831ec7 => 613,005 USDT ( $613,088.75 )
 Contract 0xc18360217d8f7ab5e7c516566761ea12ce7f9d72 => 74,480 USDT ( $74,490.17 )
 Contract 0x4fabb145d64652a948d72533023f6e7a623c7c53 => 66,524 USDT ( $66,533.08 )
@@ -376,9 +370,9 @@ Contract 0xe5b826ca2ca02f09c1725e9bd98d9a8874c30532 => 0.00 USDT ( $0.00 )
 Contract 0x06450dEe7FD2Fb8E39061434BAbCFC05599a6Fb8 => 0.00 USDT ( $0.00 )
 Contract 0x1014613e2b3cbc4d575054d4982e580d9b99d7b1 => 0.00 USDT ( $0.00 )
 
-USDC [0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48]: 1,544,409.49 tokens lost / $1,544,412.45
+USDC [0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48]: 44,547,303.84 tokens lost / $44,547,389.24
 -----------------------------------------------
-Contract [X] 0x39aa39c021dfbae8fac545936693ac917d5e7563 => 43,002,894 USDC ( $43,002,976.44 )
+Contract 0x39aa39c021dfbae8fac545936693ac917d5e7563 => 43,002,894 USDC ( $43,002,976.44 )
 Contract 0x2a3bff78b79a009976eea096a51a948a3dc00e34 => 632,297 USDC ( $632,298.21 )
 Contract 0xdac17f958d2ee523a2206206994597c13d831ec7 => 182,611 USDC ( $182,611.35 )
 Contract 0xed04915c23f00a313a544955524eb7dbd823143d => 119,126 USDC ( $119,126.22 )
@@ -536,6 +530,177 @@ Contract 0x8e870d67f660d95d5be530380d0ec0bd388289e1 => 0.00 USDC ( $0.00 )
 Contract 0x00c83aecc790e8a4453e5dd3b0b4b3680501a7a7 => 0.00 USDC ( $0.00 )
 Contract 0xe41d2489571d322189246dafa5ebde1f4699f498 => 0.00 USDC ( $0.00 )
 
+BAT [0x0d8775f648430679a709e98d2b0cb6250d2887ef]: 147,278,965.25 tokens lost / $31,711,257.00
+-----------------------------------------------
+Contract 0x6c8c6b02e7b2be14d4fa6022dfd6d75921d90e4e => 146,852,249 BAT ( $31,619,378.92 )
+Contract 0x0d8775f648430679a709e98d2b0cb6250d2887ef => 414,586 BAT ( $89,266.26 )
+Contract 0x8f8221afbb33998d8584a2b05749ba73c37a938a => 8,984 BAT ( $1,934.38 )
+Contract 0xdd974d5c2e2928dea5f71b9825b8b646686bd200 => 982 BAT ( $211.43 )
+Contract 0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359 => 697 BAT ( $150.07 )
+Contract 0x0f5d2fb29fb7d3cfee444a200298f468908cc942 => 500 BAT ( $107.65 )
+Contract 0x6b3595068778dd592e39a122f4f5a5cf09c90fe2 => 330 BAT ( $71.05 )
+Contract 0x1776e1f26f98b1a5df9cd347953a26dd3cb46671 => 213 BAT ( $45.86 )
+Contract 0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE => 106 BAT ( $22.82 )
+Contract 0xD291E7a03283640FDc51b121aC401383A46cC623 => 90 BAT ( $19.37 )
+Contract 0x3506424f91fd33084466f402d5d97f05f8e3b4af => 70 BAT ( $15.07 )
+Contract 0x419d0d8bdd9af5e606ae2232ed285aff190e711b => 30 BAT ( $6.45 )
+Contract 0xba11d00c5f74255f56a5e366f4f77f5a186d7f55 => 28 BAT ( $6.02 )
+Contract 0x2f141ce366a2462f02cea3d12cf93e4dca49e4fd => 25 BAT ( $5.38 )
+Contract 0xd084b83c305dafd76ae3e1b4e1f1fe2ecccb3988 => 24 BAT ( $5.16 )
+Contract 0xfad45e47083e4607302aa43c65fb3106f1cd7607 => 21 BAT ( $4.52 )
+Contract 0xc00e94cb662c3520282e6f5717214004a7f26888 => 14 BAT ( $3.01 )
+Contract 0xdc349913d53b446485e98b76800b6254f43df695 => 5 BAT ( $1.07 )
+Contract 0x2b591e99afe9f32eaa6214f7b7629768c40eeb39 => 2 BAT ( $0.43 )
+Contract 0xdac17f958d2ee523a2206206994597c13d831ec7 => 1 BAT ( $0.21 )
+Contract 0xe41d2489571d322189246dafa5ebde1f4699f498 => 0.00 BAT ( $0.00 )
+Contract 0x33d63ba1e57e54779f7ddaeaa7109349344cf5f1 => 0.00 BAT ( $0.00 )
+
+SUSHI [0x6b3595068778dd592e39a122f4f5a5cf09c90fe2]: 23,021,298.30 tokens lost / $28,407,315.44
+-----------------------------------------------
+Contract 0x8798249c2E607446EfB7Ad49eC89dD1865Ff4272 => 22,906,653 SUSHI ( $28,265,847.94 )
+Contract 0x6b3595068778dd592e39a122f4f5a5cf09c90fe2 => 113,855 SUSHI ( $140,492.28 )
+Contract 0x7de91b204c1c737bcee6f000aaa6569cf7061cb7 => 537 SUSHI ( $662.63 )
+Contract 0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE => 171 SUSHI ( $211.00 )
+Contract 0xf8C3527CC04340b208C854E985240c02F7B7793f => 35 SUSHI ( $43.18 )
+Contract 0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359 => 29 SUSHI ( $35.78 )
+Contract 0x77777feddddffc19ff86db637967013e6c6a116c => 10 SUSHI ( $12.33 )
+Contract 0xba8a621b4a54e61c442f5ec623687e2a942225ef => 5 SUSHI ( $6.16 )
+
+UOS [0xd13c7342e1ef687c5ad21b27c2b65d772cab5c8c]: 131,300,226.39 tokens lost / $22,819,004.13
+-----------------------------------------------
+Contract 0xd13c7342e1ef687c5ad21b27c2b65d772cab5c8c => 131,296,009 UOS ( $22,818,271.18 )
+Contract 0xfca59cd816ab1ead66534d82bc21e7515ce441cf => 2,294 UOS ( $398.68 )
+Contract 0x584bC13c7D411c00c01A62e8019472dE68768430 => 1,578 UOS ( $274.24 )
+Contract 0xff20817765cb7f73d4bde2e66e067e58d11095c2 => 344 UOS ( $59.78 )
+
+BAO [0x374cb8c27130e2c9e04f44303f3c8351b9de61c1]: 828,200,107,407.02 tokens lost / $21,968,147.49
+-----------------------------------------------
+Contract 0x374cb8c27130e2c9e04f44303f3c8351b9de61c1 => 828,200,107,407 BAO ( $21,968,147.49 )
+
+MANA [0x0f5d2fb29fb7d3cfee444a200298f468908cc942]: 43,687,536.95 tokens lost / $17,657,028.07
+-----------------------------------------------
+Contract 0xfd09cf7cfffa9932e33668311c4777cb9db3c9be => 42,481,655 MANA ( $17,169,651.28 )
+Contract 0x0f5d2fb29fb7d3cfee444a200298f468908cc942 => 1,121,877 MANA ( $453,424.82 )
+Contract 0xe5feeac09d36b18b3fa757e5cf3f8da6b8e27f4c => 57,338 MANA ( $23,174.08 )
+Contract 0x0d8775f648430679a709e98d2b0cb6250d2887ef => 21,948 MANA ( $8,870.64 )
+Contract 0x8f8221afbb33998d8584a2b05749ba73c37a938a => 1,968 MANA ( $795.39 )
+Contract 0x4fabb145d64652a948d72533023f6e7a623c7c53 => 542 MANA ( $219.05 )
+Contract 0x430EF9263E76DAE63c84292C3409D61c598E9682 => 530 MANA ( $214.20 )
+Contract 0xddb3422497e61e13543bea06989c0789117555c5 => 473 MANA ( $191.17 )
+Contract 0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0 => 436 MANA ( $176.21 )
+Contract 0xf629cbd94d3791c9250152bd8dfbdf380e2a3b9c => 350 MANA ( $141.45 )
+Contract 0xB97048628DB6B661D4C2aA833e95Dbe1A905B280 => 166 MANA ( $67.09 )
+Contract 0x26fb86579e371c7aedc461b2ddef0a8628c93d3b => 129 MANA ( $52.13 )
+Contract 0xdeFA4e8a7bcBA345F687a2f1456F5Edd9CE97202 => 41 MANA ( $16.57 )
+Contract 0xdf801468a808a32656d2ed2d2d80b72a129739f4 => 38 MANA ( $15.35 )
+Contract 0x2f141ce366a2462f02cea3d12cf93e4dca49e4fd => 14 MANA ( $5.65 )
+Contract 0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE => 10 MANA ( $4.04 )
+Contract 0x88df592f8eb5d7bd38bfef7deb0fbc02cf3778a0 => 7 MANA ( $2.82 )
+Contract 0x9b02dd390a603add5c07f9fd9175b7dabe8d63b7 => 6 MANA ( $2.42 )
+Contract 0xc18360217d8f7ab5e7c516566761ea12ce7f9d72 => 1 MANA ( $0.40 )
+
+DG [0x4b520c812e8430659fc9f12f6d0c39026c83588d]: 498,250,081.86 tokens lost / $7,612,545.35
+-----------------------------------------------
+Contract 0x4f81c790581b240a5c948afd173620ecc8c71c8d => 495,854,831 DG ( $7,575,949.36 )
+Contract 0x4b520c812e8430659fc9f12f6d0c39026c83588d => 2,395,250 DG ( $36,595.97 )
+
+BNB [0xB8c77482e45F1F44dE1745F52C74426C631bDD52]: 23,533.75 tokens lost / $5,436,420.87
+-----------------------------------------------
+Contract 0xB8c77482e45F1F44dE1745F52C74426C631bDD52 => 23,529 BNB ( $5,435,323.35 )
+Contract 0x4fabb145d64652a948d72533023f6e7a623c7c53 => 2 BNB ( $462.01 )
+Contract 0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48 => 0.00 BNB ( $0.00 )
+Contract 0xf629cbd94d3791c9250152bd8dfbdf380e2a3b9c => 0.00 BNB ( $0.00 )
+Contract 0x152649eA73beAb28c5b49B26eb48f7EAD6d4c898 => 0.00 BNB ( $0.00 )
+Contract 0x80fB784B7eD66730e8b1DBd9820aFD29931aab03 => 0.00 BNB ( $0.00 )
+Contract 0xb6ed7644c69416d67b522e20bc294a9a9b405b31 => 0.00 BNB ( $0.00 )
+Contract 0x4CF488387F035FF08c371515562CBa712f9015d4 => 0.00 BNB ( $0.00 )
+Contract 0x41dbecc1cdc5517c6f76f6a6e836adbee2754de3 => 0.00 BNB ( $0.00 )
+Contract 0x146d8d942048ad517479c9bab1788712af180fde => 0.00 BNB ( $0.00 )
+
+RNDR [0x6de037ef9ad2725eb40118bb1702ebb27e4aeb24]: 1,032,900.87 tokens lost / $2,536,065.41
+-----------------------------------------------
+Contract 0x6de037ef9ad2725eb40118bb1702ebb27e4aeb24 => 1,032,084 RNDR ( $2,534,059.76 )
+Contract 0xB8c77482e45F1F44dE1745F52C74426C631bDD52 => 600 RNDR ( $1,473.17 )
+Contract 0xe28b3B32B6c345A34Ff64674606124Dd5Aceca30 => 154 RNDR ( $378.11 )
+Contract 0x3d658390460295fb963f54dc0899cfb1c30776df => 41 RNDR ( $100.66 )
+Contract 0x514910771af9ca656af840dff83e8264ecf986ca => 20 RNDR ( $49.10 )
+
+GENE [0x6dd4e4aad29a40edd6a409b9c1625186c9855b4d]: 14,633,775.19 tokens lost / $2,391,158.86
+-----------------------------------------------
+Contract 0x6dd4e4aad29a40edd6a409b9c1625186c9855b4d => 14,633,775 GENE ( $2,391,158.83 )
+
+SHIB [0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE]: 242,732,370,033.81 tokens lost / $1,939,882.33
+-----------------------------------------------
+Contract 0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE => 241,423,543,312 SHIB ( $1,929,422.38 )
+Contract 0x761d38e5ddf6ccf6cf7c55759d5210750b5d60f3 => 334,035,961 SHIB ( $2,669.56 )
+Contract 0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48 => 163,283,668 SHIB ( $1,304.93 )
+Contract 0x0f5d2fb29fb7d3cfee444a200298f468908cc942 => 161,530,644 SHIB ( $1,290.92 )
+Contract 0x1f9840a85d5af5bf1d1762f925bdaddc4201f984 => 115,727,770 SHIB ( $924.87 )
+Contract 0xdac17f958d2ee523a2206206994597c13d831ec7 => 73,323,602 SHIB ( $585.99 )
+Contract 0x2b591e99afe9f32eaa6214f7b7629768c40eeb39 => 67,957,535 SHIB ( $543.10 )
+Contract 0x48c276e8d03813224bb1e55f953adb6d02fd3e02 => 60,041,559 SHIB ( $479.84 )
+Contract 0xcd7492db29e2ab436e819b249452ee1bbdf52214 => 35,495,932 SHIB ( $283.67 )
+Contract 0xf411903cbc70a74d22900a5de66a2dda66507255 => 35,134,481 SHIB ( $280.78 )
+Contract 0x6982508145454ce325ddbe47a25d4ec3d2311933 => 31,199,397 SHIB ( $249.34 )
+Contract 0xf293d23bf2cdc05411ca0eddd588eb1977e8dcd4 => 29,952,876 SHIB ( $239.37 )
+Contract 0x549020a9Cb845220D66d3E9c6D9F9eF61C981102 => 27,184,628 SHIB ( $217.25 )
+Contract 0xc18360217d8f7ab5e7c516566761ea12ce7f9d72 => 24,129,520 SHIB ( $192.83 )
+Contract 0x155040625d7ae3e9cada9a73e3e44f76d3ed1409 => 21,237,311 SHIB ( $169.72 )
+Contract 0x60f5672a271c7e39e787427a18353ba59a4a3578 => 19,356,323 SHIB ( $154.69 )
+Contract 0x226bb599a12c826476e3a771454697ea52e9e220 => 13,000,000 SHIB ( $103.89 )
+Contract 0x243cacb4d5ff6814ad668c3e225246efa886ad5a => 11,615,112 SHIB ( $92.82 )
+Contract 0x0e69d0a2bbb30abcb7e5cfea0e4fde19c00a8d47 => 10,936,210 SHIB ( $87.40 )
+Contract 0x4f9254c83eb525f9fcf346490bbb3ed28a81c667 => 10,614,732 SHIB ( $84.83 )
+Contract 0x846c66cf71c43f80403b51fe3906b3599d63336f => 10,000,000 SHIB ( $79.91 )
+Contract 0x49642110b712c1fd7261bc074105e9e44676c68f => 8,941,636 SHIB ( $71.46 )
+Contract 0x2BA8349123de45E931a8C8264c332E6e9CF593F9 => 8,862,876 SHIB ( $70.83 )
+Contract 0xcf0c122c6b73ff809c693db761e7baebe62b6a2e => 5,532,503 SHIB ( $44.21 )
+Contract 0xa1faa113cbe53436df28ff0aee54275c13b40975 => 4,339,402 SHIB ( $34.67 )
+Contract 0x55296f69f40ea6d20e478533c15a6b08b654e758 => 4,224,149 SHIB ( $33.75 )
+Contract 0x6fc13eace26590b80cccab1ba5d51890577d83b2 => 4,000,000 SHIB ( $31.96 )
+Contract 0x8e6cd950ad6ba651f6dd608dc70e5886b1aa6b24 => 3,359,601 SHIB ( $26.84 )
+Contract 0xff20817765cb7f73d4bde2e66e067e58d11095c2 => 2,664,792 SHIB ( $21.29 )
+Contract 0x05f4a42e251f2d52b8ed15e9fedaacfcef1fad27 => 2,450,093 SHIB ( $19.58 )
+Contract 0x4d224452801aced8b2f0aebe155379bb5d594381 => 2,348,416 SHIB ( $18.76 )
+Contract 0x090185f2135308bad17527004364ebcc2d37e5f6 => 2,051,282 SHIB ( $16.39 )
+Contract 0x4ddc2d193948926d02f9b1fe9e1daa0718270ed5 => 1,377,410 SHIB ( $11.00 )
+Contract 0xed04915c23f00a313a544955524eb7dbd823143d => 830,749 SHIB ( $6.63 )
+Contract 0xc944e90c64b2c07662a292be6244bdf05cda44a7 => 801,603 SHIB ( $6.40 )
+Contract 0x16631e53c20fd2670027c6d53efe2642929b285c => 516,051 SHIB ( $4.12 )
+Contract 0x4fabb145d64652a948d72533023f6e7a623c7c53 => 432,490 SHIB ( $3.45 )
+Contract 0xCE3f08e664693ca792caCE4af1364D5e220827B2 => 334,341 SHIB ( $2.67 )
+Contract 0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0 => 1,000 SHIB ( $0.00 )
+Contract 0xf629cbd94d3791c9250152bd8dfbdf380e2a3b9c => 1,000 SHIB ( $0.00 )
+Contract 0x6b175474e89094c44da98b954eedeac495271d0f => 50 SHIB ( $0.00 )
+
+ZRX [0xe41d2489571d322189246dafa5ebde1f4699f498]: 6,572,686.17 tokens lost / $1,750,851.30
+-----------------------------------------------
+Contract 0xb3319f5d18bc0d84dd1b4825dcde5d5f7266d407 => 6,275,216 ZRX ( $1,671,610.33 )
+Contract 0xe41d2489571d322189246dafa5ebde1f4699f498 => 284,351 ZRX ( $75,746.24 )
+Contract 0x5732046a883704404f284ce41ffadd5b007fd668 => 5,000 ZRX ( $1,331.91 )
+Contract 0xf970b8e36e23f7fc3fd752eea86f8be8d83375a6 => 2,145 ZRX ( $571.39 )
+Contract 0xeeaa40b28a2d1b0b08f6f97bb1dd4b75316c6107 => 1,211 ZRX ( $322.58 )
+Contract 0xba11d00c5f74255f56a5e366f4f77f5a186d7f55 => 1,142 ZRX ( $304.20 )
+Contract 0xaea46A60368A7bD060eec7DF8CBa43b7EF41Ad85 => 1,000 ZRX ( $266.38 )
+Contract 0x55296f69f40ea6d20e478533c15a6b08b654e758 => 896 ZRX ( $238.67 )
+Contract 0xfa1a856cfa3409cfa145fa4e20eb270df3eb21ab => 465 ZRX ( $123.86 )
+Contract 0xa0b73e1ff0b80914ab6fe0444e65848c4c34450b => 360 ZRX ( $95.89 )
+Contract 0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE => 347 ZRX ( $92.43 )
+Contract 0x1f9840a85d5af5bf1d1762f925bdaddc4201f984 => 191 ZRX ( $50.87 )
+Contract 0xcb97e65f07da24d46bcdd078ebebd7c6e6e3d750 => 159 ZRX ( $42.35 )
+Contract 0x0d8775f648430679a709e98d2b0cb6250d2887ef => 126 ZRX ( $33.56 )
+Contract 0x9992ec3cf6a55b00978cddf2b27bc6882d88d1ec => 49 ZRX ( $13.05 )
+Contract 0x4ddc2d193948926d02f9b1fe9e1daa0718270ed5 => 11 ZRX ( $2.93 )
+Contract 0xfb130d93e49dca13264344966a611dc79a456bc5 => 5 ZRX ( $1.33 )
+Contract 0x446c9033e7516d820cc9a2ce2d0b7328b579406f => 2 ZRX ( $0.53 )
+Contract 0x056fd409e1d7a124bd7017459dfea2f387b6d5cd => 1 ZRX ( $0.26 )
+Contract 0x4575f41308EC1483f3d399aa9a2826d74Da13Deb => 1 ZRX ( $0.26 )
+Contract 0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2 => 0.00 ZRX ( $0.00 )
+
+CARD [0x954b890704693af242613edef1b603825afcd708]: 3,000,688,266.19 tokens lost / $1,734,339.87
+-----------------------------------------------
+Contract 0x954b890704693af242613edef1b603825afcd708 => 3,000,688,266 CARD ( $1,734,339.87 )
+
 IDEX [0xb705268213d593b8fd88d3fdeff93aff5cbdcfae]: 24,372,449.66 tokens lost / $1,340,029.56
 -----------------------------------------------
 Contract 0xb705268213d593b8fd88d3fdeff93aff5cbdcfae => 24,372,449 IDEX ( $1,340,029.52 )
@@ -560,83 +725,11 @@ Contract 0x0d438f3b5175bebc262bf23753c1e53d03432bde => 0.00 MKR ( $0.00 )
 Contract 0x85eee30c52b0b379b046fb0f85f4f3dc3009afec => 0.00 MKR ( $0.00 )
 Contract 0xddb3422497e61e13543bea06989c0789117555c5 => 0.00 MKR ( $0.00 )
 
-DAI [0x6b175474e89094c44da98b954eedeac495271d0f]: 749,347.18 tokens lost / $749,594.63
------------------------------------------------
-Contract [X] 0x5d3a536E4D6DbD6114cc1Ead35777bAB948E3643 => 58,499,534 DAI ( $58,518,851.22 )
-Contract 0x6b175474e89094c44da98b954eedeac495271d0f => 693,034 DAI ( $693,262.84 )
-Contract 0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0 => 35,000 DAI ( $35,011.55 )
-Contract 0x83e9f223e1edb3486f876ee888d76bfba26c475a => 2,009 DAI ( $2,009.66 )
-Contract 0xf650c3d88d12db855b8bf7d11be6c55a4e07dcc9 => 1,986 DAI ( $1,986.65 )
-Contract 0xf3dcbc6d72a4e1892f7917b7c43b74131df8480e => 1,844 DAI ( $1,844.60 )
-Contract 0x6b3595068778dd592e39a122f4f5a5cf09c90fe2 => 1,698 DAI ( $1,698.56 )
-Contract 0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48 => 1,561 DAI ( $1,561.51 )
-Contract 0x2b591e99afe9f32eaa6214f7b7629768c40eeb39 => 1,427 DAI ( $1,427.47 )
-Contract 0x57ab1ec28d129707052df4df418d58a2d46d5f51 => 1,415 DAI ( $1,415.46 )
-Contract 0xa3BeD4E1c75D00fa6f4E5E6922DB7261B5E9AcD2 => 1,170 DAI ( $1,170.38 )
-Contract 0x36F3FD68E7325a35EB768F1AedaAe9EA0689d723 => 787 DAI ( $787.25 )
-Contract 0x0cec1a9154ff802e7934fc916ed7ca50bde6844e => 718 DAI ( $718.23 )
-Contract 0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359 => 703 DAI ( $703.23 )
-Contract 0xac3211a5025414af2866ff09c23fc18bc97e79b1 => 700 DAI ( $700.23 )
-Contract 0xf5581dfefd8fb0e4aec526be659cfab1f8c781da => 626 DAI ( $626.20 )
-Contract 0xaea46A60368A7bD060eec7DF8CBa43b7EF41Ad85 => 511 DAI ( $511.16 )
-Contract 0x4c327471C44B2dacD6E90525f9D629bd2e4f662C => 500 DAI ( $500.16 )
-Contract 0x24da31e7bb182cb2cabfef1d88db19c2ae1f5572 => 500 DAI ( $500.16 )
-Contract 0x0bc529c00C6401aEF6D220BE8C6Ea1667F6Ad93e => 483 DAI ( $483.15 )
-Contract 0x06450dEe7FD2Fb8E39061434BAbCFC05599a6Fb8 => 442 DAI ( $442.14 )
-Contract 0x767fe9edc9e0df98e07454847909b5e959d7ca0e => 330 DAI ( $330.10 )
-Contract 0x6b1a8f210ec6b7b6643cea3583fb0c079f367898 => 305 DAI ( $305.10 )
-Contract 0x85eee30c52b0b379b046fb0f85f4f3dc3009afec => 300 DAI ( $300.09 )
-Contract 0x21bfbda47a0b4b5b1248c767ee49f7caa9b23697 => 247 DAI ( $247.08 )
-Contract 0x1ceb5cb57c4d4e2b2433641b95dd330a33185a44 => 200 DAI ( $200.06 )
-Contract 0x58b6a8a3302369daec383334672404ee733ab239 => 197 DAI ( $197.06 )
-Contract 0x2260fac5e5542a773aa44fbcfedf7c193bc2c599 => 137 DAI ( $137.04 )
-Contract 0xa0b73e1ff0b80914ab6fe0444e65848c4c34450b => 111 DAI ( $111.03 )
-Contract 0xc00e94cb662c3520282e6f5717214004a7f26888 => 100 DAI ( $100.03 )
-Contract 0x761d38e5ddf6ccf6cf7c55759d5210750b5d60f3 => 49 DAI ( $49.01 )
-Contract 0x3affcca64c2a6f4e3b6bd9c64cd2c969efd1ecbe => 49 DAI ( $49.01 )
-Contract 0xdac17f958d2ee523a2206206994597c13d831ec7 => 39 DAI ( $39.01 )
-Contract 0x491604c0FDF08347Dd1fa4Ee062a822A5DD06B5D => 31 DAI ( $31.01 )
-Contract 0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE => 27 DAI ( $27.00 )
-Contract 0x1f9840a85d5af5bf1d1762f925bdaddc4201f984 => 24 DAI ( $24.00 )
-Contract 0xaaaebe6fe48e54f431b0c390cfaf0b017d09d42d => 24 DAI ( $24.00 )
-Contract 0x054D64b73d3D8A21Af3D764eFd76bCaA774f3Bb2 => 14 DAI ( $14.00 )
-Contract 0x19062190b1925b5b6689d7073fdfc8c2976ef8cb => 12 DAI ( $12.00 )
-Contract 0x0Ae055097C6d159879521C384F1D2123D1f195e6 => 10 DAI ( $10.00 )
-Contract 0x0d8775f648430679a709e98d2b0cb6250d2887ef => 5 DAI ( $5.00 )
-Contract 0x7bef710a5759d197ec0bf621c3df802c2d60d848 => 5 DAI ( $5.00 )
-Contract 0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2 => 0.00 DAI ( $0.00 )
-Contract 0x4ddc2d193948926d02f9b1fe9e1daa0718270ed5 => 0.00 DAI ( $0.00 )
-Contract 0x39aa39c021dfbae8fac545936693ac917d5e7563 => 0.00 DAI ( $0.00 )
-Contract 0xcf3c8be2e2c42331da80ef210e9b1b307c03d36a => 0.00 DAI ( $0.00 )
-Contract 0x990f341946A3fdB507aE7e52d17851B87168017c => 0.00 DAI ( $0.00 )
-
 GTC [0xde30da39c46104798bb5aa3fe8b9e0e1f348163f]: 530,659.49 tokens lost / $517,484.10
 -----------------------------------------------
 Contract 0xde30da39c46104798bb5aa3fe8b9e0e1f348163f => 530,659 GTC ( $517,483.63 )
 Contract 0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2 => 0.00 GTC ( $0.00 )
 Contract 0xf0ee6b27b759c9893ce4f094b49ad28fd15a23e4 => 0.00 GTC ( $0.00 )
-
-MANA [0x0f5d2fb29fb7d3cfee444a200298f468908cc942]: 1,205,881.87 tokens lost / $487,376.75
------------------------------------------------
-Contract [X] 0xfd09cf7cfffa9932e33668311c4777cb9db3c9be => 42,481,655 MANA ( $17,169,651.28 )
-Contract 0x0f5d2fb29fb7d3cfee444a200298f468908cc942 => 1,121,877 MANA ( $453,424.82 )
-Contract 0xe5feeac09d36b18b3fa757e5cf3f8da6b8e27f4c => 57,338 MANA ( $23,174.08 )
-Contract 0x0d8775f648430679a709e98d2b0cb6250d2887ef => 21,948 MANA ( $8,870.64 )
-Contract 0x8f8221afbb33998d8584a2b05749ba73c37a938a => 1,968 MANA ( $795.39 )
-Contract 0x4fabb145d64652a948d72533023f6e7a623c7c53 => 542 MANA ( $219.05 )
-Contract 0x430EF9263E76DAE63c84292C3409D61c598E9682 => 530 MANA ( $214.20 )
-Contract 0xddb3422497e61e13543bea06989c0789117555c5 => 473 MANA ( $191.17 )
-Contract 0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0 => 436 MANA ( $176.21 )
-Contract 0xf629cbd94d3791c9250152bd8dfbdf380e2a3b9c => 350 MANA ( $141.45 )
-Contract 0xB97048628DB6B661D4C2aA833e95Dbe1A905B280 => 166 MANA ( $67.09 )
-Contract 0x26fb86579e371c7aedc461b2ddef0a8628c93d3b => 129 MANA ( $52.13 )
-Contract 0xdeFA4e8a7bcBA345F687a2f1456F5Edd9CE97202 => 41 MANA ( $16.57 )
-Contract 0xdf801468a808a32656d2ed2d2d80b72a129739f4 => 38 MANA ( $15.35 )
-Contract 0x2f141ce366a2462f02cea3d12cf93e4dca49e4fd => 14 MANA ( $5.65 )
-Contract 0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE => 10 MANA ( $4.04 )
-Contract 0x88df592f8eb5d7bd38bfef7deb0fbc02cf3778a0 => 7 MANA ( $2.82 )
-Contract 0x9b02dd390a603add5c07f9fd9175b7dabe8d63b7 => 6 MANA ( $2.42 )
-Contract 0xc18360217d8f7ab5e7c516566761ea12ce7f9d72 => 1 MANA ( $0.40 )
 
 PEOPLE [0x7a58c0be72be218b41c608b7fe7c5bb630736c71]: 39,436,797.20 tokens lost / $481,888.83
 -----------------------------------------------
@@ -904,17 +997,6 @@ MX [0x11eef04c884e24d9b7b4760e7476d06ddf797f36]: 52,040.74 tokens lost / $146,31
 Contract 0x11eef04c884e24d9b7b4760e7476d06ddf797f36 => 51,839 MX ( $145,745.64 )
 Contract 0xdac17f958d2ee523a2206206994597c13d831ec7 => 201 MX ( $565.11 )
 
-SUSHI [0x6b3595068778dd592e39a122f4f5a5cf09c90fe2]: 114,645.05 tokens lost / $141,467.18
------------------------------------------------
-Contract [X] 0x8798249c2E607446EfB7Ad49eC89dD1865Ff4272 => 22,906,653 SUSHI ( $28,265,847.94 )
-Contract 0x6b3595068778dd592e39a122f4f5a5cf09c90fe2 => 113,855 SUSHI ( $140,492.28 )
-Contract 0x7de91b204c1c737bcee6f000aaa6569cf7061cb7 => 537 SUSHI ( $662.63 )
-Contract 0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE => 171 SUSHI ( $211.00 )
-Contract 0xf8C3527CC04340b208C854E985240c02F7B7793f => 35 SUSHI ( $43.18 )
-Contract 0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359 => 29 SUSHI ( $35.78 )
-Contract 0x77777feddddffc19ff86db637967013e6c6a116c => 10 SUSHI ( $12.33 )
-Contract 0xba8a621b4a54e61c442f5ec623687e2a942225ef => 5 SUSHI ( $6.16 )
-
 NEXO [0xb62132e35a6c13ee1ee0f84dc5d40bad8d815206]: 211,619.03 tokens lost / $135,135.86
 -----------------------------------------------
 Contract 0xb62132e35a6c13ee1ee0f84dc5d40bad8d815206 => 211,102 NEXO ( $134,805.69 )
@@ -1044,31 +1126,6 @@ DYDX [0x92d6c1e31e14520e676a687f0a93788b716beff5]: 39,262.41 tokens lost / $93,1
 Contract 0x92d6c1e31e14520e676a687f0a93788b716beff5 => 38,781 DYDX ( $92,006.15 )
 Contract 0x6b175474e89094c44da98b954eedeac495271d0f => 478 DYDX ( $1,134.03 )
 Contract 0xdac17f958d2ee523a2206206994597c13d831ec7 => 2 DYDX ( $4.74 )
-
-BAT [0x0d8775f648430679a709e98d2b0cb6250d2887ef]: 426,715.79 tokens lost / $91,877.98
------------------------------------------------
-Contract [X] 0x6c8c6b02e7b2be14d4fa6022dfd6d75921d90e4e => 146,852,249 BAT ( $31,619,378.92 )
-Contract 0x0d8775f648430679a709e98d2b0cb6250d2887ef => 414,586 BAT ( $89,266.26 )
-Contract 0x8f8221afbb33998d8584a2b05749ba73c37a938a => 8,984 BAT ( $1,934.38 )
-Contract 0xdd974d5c2e2928dea5f71b9825b8b646686bd200 => 982 BAT ( $211.43 )
-Contract 0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359 => 697 BAT ( $150.07 )
-Contract 0x0f5d2fb29fb7d3cfee444a200298f468908cc942 => 500 BAT ( $107.65 )
-Contract 0x6b3595068778dd592e39a122f4f5a5cf09c90fe2 => 330 BAT ( $71.05 )
-Contract 0x1776e1f26f98b1a5df9cd347953a26dd3cb46671 => 213 BAT ( $45.86 )
-Contract 0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE => 106 BAT ( $22.82 )
-Contract 0xD291E7a03283640FDc51b121aC401383A46cC623 => 90 BAT ( $19.37 )
-Contract 0x3506424f91fd33084466f402d5d97f05f8e3b4af => 70 BAT ( $15.07 )
-Contract 0x419d0d8bdd9af5e606ae2232ed285aff190e711b => 30 BAT ( $6.45 )
-Contract 0xba11d00c5f74255f56a5e366f4f77f5a186d7f55 => 28 BAT ( $6.02 )
-Contract 0x2f141ce366a2462f02cea3d12cf93e4dca49e4fd => 25 BAT ( $5.38 )
-Contract 0xd084b83c305dafd76ae3e1b4e1f1fe2ecccb3988 => 24 BAT ( $5.16 )
-Contract 0xfad45e47083e4607302aa43c65fb3106f1cd7607 => 21 BAT ( $4.52 )
-Contract 0xc00e94cb662c3520282e6f5717214004a7f26888 => 14 BAT ( $3.01 )
-Contract 0xdc349913d53b446485e98b76800b6254f43df695 => 5 BAT ( $1.07 )
-Contract 0x2b591e99afe9f32eaa6214f7b7629768c40eeb39 => 2 BAT ( $0.43 )
-Contract 0xdac17f958d2ee523a2206206994597c13d831ec7 => 1 BAT ( $0.21 )
-Contract 0xe41d2489571d322189246dafa5ebde1f4699f498 => 0.00 BAT ( $0.00 )
-Contract 0x33d63ba1e57e54779f7ddaeaa7109349344cf5f1 => 0.00 BAT ( $0.00 )
 
 AGIX [0x5b7533812759b45c2b44c19e320ba2cd2681b542]: 380,854.48 tokens lost / $89,257.16
 -----------------------------------------------
@@ -1322,11 +1379,6 @@ Contract 0xb056c38f6b7dc4064367403e26424cd2c60655e1 => 782,155 CEEK ( $35,559.33
 Contract 0xf34960d9d60be18cc1d5afc1a6f012a723a28811 => 25,922 CEEK ( $1,178.49 )
 Contract 0xc56b13ebbcffa67cfb7979b900b736b3fb480d78 => 8 CEEK ( $0.36 )
 
-DG [0x4b520c812e8430659fc9f12f6d0c39026c83588d]: 2,395,250 tokens lost / $36,595.97
------------------------------------------------
-Contract [X] 0x4f81c790581b240a5c948afd173620ecc8c71c8d => 495,854,831 DG ( $7,575,949.36 )
-Contract 0x4b520c812e8430659fc9f12f6d0c39026c83588d => 2,395,250 DG ( $36,595.97 )
-
 DUSK [0x940a2db1b7008b6c776d4faaca729d6d4a4aa551]: 313,077.25 tokens lost / $36,134.29
 -----------------------------------------------
 Contract 0x940a2db1b7008b6c776d4faaca729d6d4a4aa551 => 313,077 DUSK ( $36,134.26 )
@@ -1551,15 +1603,6 @@ Contract 0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0 => 1 TRU ( $0.03 )
 SYLO [0xf293d23bf2cdc05411ca0eddd588eb1977e8dcd4]: 15,559,061.66 tokens lost / $18,825.85
 -----------------------------------------------
 Contract 0xf293d23bf2cdc05411ca0eddd588eb1977e8dcd4 => 15,559,061 SYLO ( $18,825.85 )
-
-QNT [0x4a220e6096b25eadb88358cb44068a3248254675]: 181.81 tokens lost / $18,743.43
------------------------------------------------
-Contract [X] 0x4a220e6096b25eadb88358cb44068a3248254675 => 9,550,444 QNT ( $984,586,850.73 )
-Contract 0x8a854288a5976036a725879164ca3e91d30c6a1b => 138 QNT ( $14,226.87 )
-Contract 0x967da4048cD07aB37855c090aAF366e4ce1b9F48 => 30 QNT ( $3,092.79 )
-Contract 0x3506424f91fd33084466f402d5d97f05f8e3b4af => 6 QNT ( $618.55 )
-Contract 0xc18360217d8f7ab5e7c516566761ea12ce7f9d72 => 3 QNT ( $309.27 )
-Contract 0x28c8d01ff633ea9cd8fc6a451d7457889e698de6 => 2 QNT ( $206.18 )
 
 BAL [0xba100000625a3754423978a60c9317c58a424e3d]: 5,186.23 tokens lost / $18,512.61
 -----------------------------------------------
@@ -1966,14 +2009,6 @@ CRE [0x115ec79f1de567ec68b7ae7eda501b406626478e]: 1,185,508.28 tokens lost / $7,
 -----------------------------------------------
 Contract 0x115ec79f1de567ec68b7ae7eda501b406626478e => 1,185,508 CRE ( $7,078.50 )
 Contract 0xdac17f958d2ee523a2206206994597c13d831ec7 => 0.00 CRE ( $0.00 )
-
-LEND [0x80fB784B7eD66730e8b1DBd9820aFD29931aab03]: 5,457.10 tokens lost / $6,952.35
------------------------------------------------
-Contract [X] 0x80fB784B7eD66730e8b1DBd9820aFD29931aab03 => 1,265,594,096 LEND ( $1,612,366,878.30 )
-Contract 0x595832f8fc6bf59c85c527fec3740a1b7a361269 => 1,978 LEND ( $2,519.97 )
-Contract 0x1f9840a85d5af5bf1d1762f925bdaddc4201f984 => 1,664 LEND ( $2,119.93 )
-Contract 0xfca59cd816ab1ead66534d82bc21e7515ce441cf => 1,456 LEND ( $1,854.94 )
-Contract 0xb056c38f6b7dc4064367403e26424cd2c60655e1 => 358 LEND ( $456.09 )
 
 TRL [0x58f9102bf53cf186682bd9a281d3cd3c616eec41]: 300,000 tokens lost / $6,940.31
 -----------------------------------------------
@@ -3025,13 +3060,6 @@ SHR [0xd98f75b1a3261dab9eed4956c93f33749027a964]: 511,782.61 tokens lost / $736.
 -----------------------------------------------
 Contract 0xd98f75b1a3261dab9eed4956c93f33749027a964 => 494,892 SHR ( $712.17 )
 Contract 0x4ee438be38f8682abb089f2bfea48851c5e71eaf => 16,890 SHR ( $24.30 )
-
-UOS [0xd13c7342e1ef687c5ad21b27c2b65d772cab5c8c]: 4,217.24 tokens lost / $732.92
------------------------------------------------
-Contract [X] 0xd13c7342e1ef687c5ad21b27c2b65d772cab5c8c => 131,296,009 UOS ( $22,818,271.18 )
-Contract 0xfca59cd816ab1ead66534d82bc21e7515ce441cf => 2,294 UOS ( $398.68 )
-Contract 0x584bC13c7D411c00c01A62e8019472dE68768430 => 1,578 UOS ( $274.24 )
-Contract 0xff20817765cb7f73d4bde2e66e067e58d11095c2 => 344 UOS ( $59.78 )
 
 LEVER [0x4b5f49487ea7b3609b1ad05459be420548789f1f]: 522,679.45 tokens lost / $717.28
 -----------------------------------------------
@@ -5378,18 +5406,6 @@ wMANA [0xfd09cf7cfffa9932e33668311c4777cb9db3c9be]: 0.00 tokens lost / $0.00
 XAUt [0x68749665ff8d2d112fa859aa293f07a622782f38]: 0.00 tokens lost / $0.00
 -----------------------------------------------
 
-frxETH [0x5e8422345238f34275888049021821e8e08caa1f]: 0.00 tokens lost / $0.00
------------------------------------------------
-Contract [X] 0xac3e018457b222d93114458476f3e3416abbe38f => 206,447 frxETH ( $378,628,941.38 )
-
-RPL [0xd33526068d116ce69f19a9ee46f0bd304f21a51f]: 0.00 tokens lost / $0.00
------------------------------------------------
-Contract [X] 0xd33526068d116ce69f19a9ee46f0bd304f21a51f => 2,806,029 RPL ( $66,404,443.86 )
-
-NXM [0xd7c49cee7e9188cca6ad8ff264c1da2e69d4cf3b]: 0.00 tokens lost / $0.00
------------------------------------------------
-Contract [X] 0x0d438f3b5175bebc262bf23753c1e53d03432bde => 2,390,152 NXM ( $136,319,765.26 )
-
 SFP [0x12e2b8033420270db2f3b328e32370cb5b2ca134]: 0.00 tokens lost / $0.00
 -----------------------------------------------
 
@@ -5441,10 +5457,6 @@ KUB [0x0649cef6d11ed6f88535462e147304d3fe5ae14d]: 0.00 tokens lost / $0.00
 DKA [0x5dc60C4D5e75D22588FA17fFEB90A63E535efCE0]: 0.00 tokens lost / $0.00
 -----------------------------------------------
 
-DEXE [0xde4EE8057785A7e8e800Db58F9784845A5C2Cbd6]: 0.00 tokens lost / $0.00
------------------------------------------------
-Contract [X] 0xde4EE8057785A7e8e800Db58F9784845A5C2Cbd6 => 60,004,552 DEXE ( $143,681,919.76 )
-
 IQ [0x579cea1889991f68acc35ff5c3dd0621ff29b0c9]: 0.00 tokens lost / $0.00
 -----------------------------------------------
 
@@ -5477,10 +5489,6 @@ EUROC [0x1aBaEA1f7C830bD89Acc67eC4af516284b1bC33c]: 0.00 tokens lost / $0.00
 XIDO [0xf6650117017ffd48b725b4ec5a00b414097108a7]: 0.00 tokens lost / $0.00
 -----------------------------------------------
 
-QANX [0xaaa9214f675316182eaa21c85f0ca99160cc3aaa]: 0.00 tokens lost / $0.00
------------------------------------------------
-Contract [X] 0xaaa9214f675316182eaa21c85f0ca99160cc3aaa => 2,722,474,009 QANX ( $62,999,974.07 )
-
 ankrETH [0xE95A203B1a91a908F9B9CE46459d101078c2c3cb]: 0.00 tokens lost / $0.00
 -----------------------------------------------
 
@@ -5495,10 +5503,6 @@ Contract 0x4e15361fd6b4bb609fa63c81a2be19d873717870 => 5 AURA ( $0.00 )
 
 BEAN [0xbea0000029ad1c77d3d5d23ba2d8893db9d1efab]: 0.00 tokens lost / $0.00
 -----------------------------------------------
-
-ATA [0xa2120b9e674d3fc3875f415a7df52e382f141225]: 0.00 tokens lost / $0.00
------------------------------------------------
-Contract [X] 0xa2120b9e674d3fc3875f415a7df52e382f141225 => 546,511,102 ATA ( $49,773,451.25 )
 
 ASD [0xff742d05420b6aca4481f635ad8341f81a6300c2]: 0.00 tokens lost / $0.00
 -----------------------------------------------
@@ -5534,10 +5538,6 @@ Contract 0x0e69d0a2bbb30abcb7e5cfea0e4fde19c00a8d47 => 2,057 GTO ( $0.00 )
 Contract 0x27054b13b1b798b345b591a4d22e6562d47ea75a => 100 GTO ( $0.00 )
 Contract 0xd850942ef8811f2a866692a623011bde52a462c1 => 5 GTO ( $0.00 )
 Contract 0xdd974d5c2e2928dea5f71b9825b8b646686bd200 => 1 GTO ( $0.00 )
-
-AUTO [0x622dFfCc4e83C64ba959530A5a5580687a57581b]: 0.00 tokens lost / $0.00
------------------------------------------------
-Contract [X] 0x622dFfCc4e83C64ba959530A5a5580687a57581b => 7,960,350 AUTO ( $166,689,729 )
 
 MELD [0x333000333b26eE30214B4af6419D9ab07a450400]: 0.00 tokens lost / $0.00
 -----------------------------------------------

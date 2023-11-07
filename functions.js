@@ -405,7 +405,7 @@ async function processOneToken(web3, contractList, tokenAddress) {
  * @param {Object} res - An object containing the result of a token balance check.
  * @returns {Object} - An object containing the formatted result string and the value in dollars.
  */
-function formatTokenResult(res) {
+function formatTokenResult(res, exclude = true) {
     let localStr = ''
 
     if (!res.ticker) { // invalid token
@@ -422,10 +422,14 @@ function formatTokenResult(res) {
     // records already sorted by value - formatting output
     for (const record of res.records) {
         let prefix = '';
-        if (record.exclude) {
+        if (record.exclude && exclude) {
             prefix = '[X] ';
         } else {
-            sum += record.amount;
+            if (typeof record.amount === 'string') {
+                sum += BigInt(record.amount);
+            } else {
+                sum += record.amount;
+            }
         }
         const str = `Contract ${prefix}${record.contract} => ${numberWithCommas(record.roundedAmount)} ${res.ticker} ( $${record.dollarValue} )`
         localStr += str + '\n'

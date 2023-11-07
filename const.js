@@ -90,8 +90,8 @@ const ethRpcArray = [
     // 'https://eth.drpc.org', // 0:40  // disabled
     // 'https://eth.drpc.org', // 0:40  // disabled
     // 'https://eth.drpc.org', // 0:40  // disabled
-    // 'https://eth-rpc.gateway.pokt.network',  // 1:10
-    // 'https://eth-rpc.gateway.pokt.network',  // 1:10
+    'https://eth-pokt.nodies.app',  // 1:10
+    'https://eth-pokt.nodies.app',  // 1:10
     'https://eth.llamarpc.com', // 1:50 // disabled
     'https://eth.llamarpc.com', // 1:50 // disabled
     'https://ethereum.publicnode.com', // 1:57

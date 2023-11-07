@@ -4,6 +4,9 @@ const { Web3 } = require('web3');
 
 const { numberWithCommas, parseAddress, processOneToken, formatTokenResult } = require('./functions');
 
+const EXCLUDES = process.env.EXCLUDES !== 'false';
+const RESULTS = process.env.RESULTS || '';
+
 // NOTE default tokens and contracts list moved to const.js file
 const { tokens, contracts, rpcMap } = require('./const');
 const chains = [...rpcMap.keys()];
@@ -15,6 +18,8 @@ const CONTRACTS_FILE = process.env.CONTRACTS_FILE || 'eth_tokens_list.txt';
 
 // main ()
 (async () => {
+    console.log(EXCLUDES);
+
     // can provide active chain via env var.
     // list of supported predefined chains in rpcMap const.
     const chain = (process.env.CHAIN || chains[0]).toLowerCase();
@@ -54,36 +59,50 @@ const CONTRACTS_FILE = process.env.CONTRACTS_FILE || 'eth_tokens_list.txt';
     const contractListArray = Array.from(new Set(chainContracts.concat(chainTokens)));
     console.log(`Addresses: ${contractListArray.length}`);
 
-    const resultsArray = [];
+    let resultsArray = [];
     let wholeSum = 0;
     let counter = 0;
 
-    for (const tokenAddress of chainTokens) {
-        console.time('getOneBalance');
-        const res = await processOneToken(web3provider, contractListArray, tokenAddress);
+    if (!RESULTS) {
 
-        const formatted = formatTokenResult(res);
+        for (const tokenAddress of chainTokens) {
+            console.time('getOneBalance');
+            const res = await processOneToken(web3provider, contractListArray, tokenAddress);
 
-        wholeSum += formatted.asDollar;
-        resultsArray.push({
-            ...res,
-            asDollar: formatted.asDollar,
-            amount: formatted.amount
-        });
+            const formatted = formatTokenResult(res);
 
-        counter++;
-        console.log(counter, '.', res.ticker, ':', formatted.asDollar);
-        console.timeEnd('getOneBalance');
+            wholeSum += formatted.asDollar;
+            resultsArray.push({
+                ...res,
+                asDollar: formatted.asDollar,
+                amount: formatted.amount
+            });
+
+            counter++;
+            console.log(counter, '.', res.ticker, ':', formatted.asDollar);
+            console.timeEnd('getOneBalance');
+        }
+    } else {
+        resultsArray = require(path.resolve(__dirname + '/' + RESULTS));
+        for (const res of resultsArray) {
+            const formatted = formatTokenResult(res, EXCLUDES);
+            res.asDollar = formatted.asDollar;
+            res.amount = formatted.amount;
+        }
     }
 
     resultsArray.sort(function (a, b) {
         return b.asDollar - a.asDollar;
     });
 
+    wholeSum = 0;
+    counter = 0;
     let resStr = '';
     for (const res of resultsArray) {
-        const formatted = formatTokenResult(res);
+        const formatted = formatTokenResult(res, EXCLUDES);
         resStr += formatted.resStr + '\n';
+        wholeSum += formatted.asDollar;
+        counter++;
     }
 
     resStr = `WHOLE SUM: $${numberWithCommas(wholeSum)} for ${counter} tokens\n\n` + resStr;
