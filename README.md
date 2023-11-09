@@ -27,6 +27,13 @@ Your `.env` now contains the following environment variables:
 - `EXCLUDES` (placeholder) - Exclude or not from results some tokens at some contracts, cause they are not losses. `true` by default.
 - `RESULTS` (placeholder) - Pass to script previous results of script work without collecting actual values.
 
+Start app:
+
+```bash
+npm start
+```
+
+
 ## Format of 'Excludes' file
 
 Exclusions (exceptions) - situation when one ERC20 can normally exist on balance of another ERC20 token.
