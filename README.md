@@ -33,6 +33,9 @@ Start app:
 npm start
 ```
 
+Results in **OUT** folder:
+- `lost_tokens_result.json` - unsorted JSON version maybe used for further used. **Rewrites on each run!**   
+- `lost_tokens_result.txt` - human-readable sorted results
 
 ## Format of 'Excludes' file
 
