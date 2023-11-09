@@ -1,4 +1,5 @@
-# Script for finding lost ERC20 tokens on EVM blockchains (CLI version)
+# Script for finding lost ERC20 tokens on EVM blockchains 
+# (CLI version)
 
 This is an improved version of script introduced by @Dexaran [ERC20_losses](https://dexaran.github.io/erc20_losses/)
 
