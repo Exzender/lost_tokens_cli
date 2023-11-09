@@ -30,6 +30,9 @@ Your `.env` now contains the following environment variables:
 ## Format of 'Excludes' file
 
 Exclusions (exceptions) - situation when one ERC20 can normally exist on balance of another ERC20 token.
+
+Exclusions (exceptions) listed in `excludes.json` file
+
 Exclusions list is an array of pairs, where 
  - 1st value - is token *Address*
  - 2nd value - array of *Addresses* of other tokens where 1st token can normally exist.
