@@ -1,8 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 const { Web3 } = require('web3');
+require('dotenv').config();
 
-const { numberWithCommas, parseAddress, processOneToken, formatTokenResult } = require('./functions');
+const { numberWithCommas, parseAddress, processOneToken, formatTokenResult, loadExcludes } = require('./functions');
+const excludedMap = loadExcludes();
 
 const EXCLUDES = process.env.EXCLUDES !== 'false';
 const RESULTS = process.env.RESULTS || '';
@@ -82,12 +84,28 @@ const CONTRACTS_FILE = process.env.CONTRACTS_FILE || 'eth_tokens_list.txt';
             console.log(counter, '.', res.ticker, ':', formatted.asDollar);
             console.timeEnd('getOneBalance');
         }
+
     } else {
         resultsArray = require(path.resolve(__dirname + '/' + RESULTS));
         for (const res of resultsArray) {
-            const formatted = formatTokenResult(res, EXCLUDES);
+            const formatted = formatTokenResult(res);
             res.asDollar = formatted.asDollar;
             res.amount = formatted.amount;
+        }
+    }
+
+    if (EXCLUDES) {
+        // mark excluded results
+        for (const res of resultsArray) {
+            const tokenAddress = res.tokenAddress.toLowerCase();
+            if (excludedMap.has(tokenAddress)) {
+                const excluded = excludedMap.get(tokenAddress);
+                for (let item of res.records) {
+                    if (excluded.includes(item.contract.toLowerCase())) {
+                        item.exclude = true;
+                    }
+                }
+            }
         }
     }
 

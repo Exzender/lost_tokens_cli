@@ -1,6 +1,8 @@
-const { ERC20, ERC20n, rpcMap, ethRpcArray,
-    excludedMap } = require('./const');
+const path = require('path');
 const { Web3 } = require('web3');
+
+const { ERC20, ERC20n, rpcMap, ethRpcArray
+     } = require('./const');
 
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
@@ -378,16 +380,6 @@ async function processOneToken(web3, contractList, tokenAddress) {
 
     const results = await findBalances(web3, localList, tokenObject);
 
-    // mark excluded results
-    if (excludedMap.has(tokenAddress)) {
-        const excluded = excludedMap.get(tokenAddress);
-        for (let item of results) {
-            if (excluded.includes(item.contract)) {
-                item.exclude = true;
-            }
-        }
-    }
-
     return {
         tokenAddress,
         ticker: tokenObject.ticker,
@@ -445,6 +437,17 @@ function formatTokenResult(res, exclude = true) {
     return { resStr: localStr, asDollar, amount: roundedAmount }
 }
 
+function loadExcludes() {
+    const res = new Map();
+    const excludesArray = require(path.resolve(__dirname + '/excludes.json'));
+    for (let item of excludesArray) {
+        const key = item[0].toLowerCase();
+        const values = item[1].map((val) => val.toLowerCase());
+        res.set(key, values);
+    }
+    return res;
+}
+
 module.exports = {
     getTokenInfo,
     getBalanceOf,
@@ -452,5 +455,6 @@ module.exports = {
     processOneToken,
     formatTokenResult,
     parseAddress,
-    numberWithCommas
+    numberWithCommas,
+    loadExcludes
 }
