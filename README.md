@@ -1,7 +1,9 @@
 # Script for finding lost ERC20 tokens on EVM blockchains (CLI version)
 
 This is an improved version of script introduced by @Dexaran [ERC20_losses](https://dexaran.github.io/erc20_losses/)
+
 Read more in Dexaran's article: [Known problems of ERC-20 token standard](https://dexaran820.medium.com/known-problems-of-erc20-token-standard-e98887b9532c)
+
 Full processing of *1238* ERC20 tokens currently listed on CMC may take up to *4 hrs*.
 
 ## Running locally
