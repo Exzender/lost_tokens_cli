@@ -87,11 +87,11 @@ const CONTRACTS_FILE = process.env.CONTRACTS_FILE || 'eth_tokens_list.txt';
 
     } else {
         resultsArray = require(path.resolve(__dirname + '/' + RESULTS));
-        for (const res of resultsArray) {
-            const formatted = formatTokenResult(res);
-            res.asDollar = formatted.asDollar;
-            res.amount = formatted.amount;
-        }
+        // for (const res of resultsArray) {
+        //     const formatted = formatTokenResult(res);
+        //     res.asDollar = formatted.asDollar;
+        //     res.amount = formatted.amount;
+        // }
     }
 
     if (EXCLUDES) {
@@ -107,6 +107,12 @@ const CONTRACTS_FILE = process.env.CONTRACTS_FILE || 'eth_tokens_list.txt';
                 }
             }
         }
+    }
+
+    for (const res of resultsArray) {
+        const formatted = formatTokenResult(res);
+        res.asDollar = formatted.asDollar;
+        res.amount = formatted.amount;
     }
 
     resultsArray.sort(function (a, b) {
