@@ -1,20 +1,4 @@
-WHOLE SUM: $460,703,808.67 for 1238 tokens
-
-SPELL [0x090185f2135308bad17527004364ebcc2d37e5f6]: 224,091,370,770.54 tokens lost / $214,638,351.44
------------------------------------------------
-Contract 0x090185f2135308bad17527004364ebcc2d37e5f6 => 224,090,836,727 SPELL ( $214,637,839.93 )
-Contract 0xf16e81dce15b08f326220742020379b855b87df9 => 479,371 SPELL ( $459.14 )
-Contract 0x3597bfd533a99c9aa083587b074434e61eb0a258 => 25,000 SPELL ( $23.94 )
-Contract 0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE => 11,767 SPELL ( $11.27 )
-Contract 0x152649eA73beAb28c5b49B26eb48f7EAD6d4c898 => 9,079 SPELL ( $8.69 )
-Contract 0x4e3fbd56cd56c3e72c1403e103b45db9da5b9d2b => 8,823 SPELL ( $8.45 )
-Contract 0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0 => 1 SPELL ( $0.00 )
-
-VEN [0xd850942ef8811f2a866692a623011bde52a462c1]: 6,304,382.13 tokens lost / $110,831,037.91
------------------------------------------------
-Contract 0xd850942ef8811f2a866692a623011bde52a462c1 => 6,303,432 VEN ( $110,814,334.55 )
-Contract 0xf0ee6b27b759c9893ce4f094b49ad28fd15a23e4 => 670 VEN ( $11,778.59 )
-Contract 0xb7cb1c96db6b22b0d3d9536e0108d062bd488f74 => 279 VEN ( $4,904.82 )
+WHOLE SUM: $135,504,695.34 for 1238 tokens
 
 GTO [0xc5bbae50781be1669306b9e001eff57a2957b09d]: 305,588,718.50 tokens lost / $24,697,680.22
 -----------------------------------------------
@@ -920,6 +904,12 @@ Contract 0x7d29a64504629172a429e64183d6673b9dacbfce => 153 OCEAN ( $157.22 )
 Contract 0x6b175474e89094c44da98b954eedeac495271d0f => 95 OCEAN ( $97.62 )
 Contract 0x7f1f2d3dfa99678675ece1c243d3f7bc3746db5d => 3 OCEAN ( $3.08 )
 Contract 0x33d63ba1e57e54779f7ddaeaa7109349344cf5f1 => 0.00 OCEAN ( $0.00 )
+
+VET [0xd850942ef8811f2a866692a623011bde52a462c1]: 6,304,382.13 tokens lost / $269,764.51
+-----------------------------------------------
+Contract 0xd850942ef8811f2a866692a623011bde52a462c1 => 6,303,432 VET ( $110,814,334.55 )
+Contract 0xf0ee6b27b759c9893ce4f094b49ad28fd15a23e4 => 670 VET ( $11,778.59 )
+Contract 0xb7cb1c96db6b22b0d3d9536e0108d062bd488f74 => 279 VET ( $4,904.82 )
 
 Metis [0x9e32b13ce7f2e80a01932b42553652e053d6ed8e]: 3,759.21 tokens lost / $259,906.60
 -----------------------------------------------
@@ -3651,6 +3641,16 @@ Contract 0x5a666c7d92e5fa7edcb6390e4efd6d0cdd69cf37 => 2,660 MARSH ( $519.97 )
 PLAY [0xe477292f1b3268687a29376116b0ed27a9c76170]: 408,357.68 tokens lost / $519.67
 -----------------------------------------------
 Contract 0xe477292f1b3268687a29376116b0ed27a9c76170 => 408,357 PLAY ( $519.67 )
+
+SPELL [0x090185f2135308bad17527004364ebcc2d37e5f6]: 534,043.17 tokens lost / $511.51
+-----------------------------------------------
+Contract [X] 0x090185f2135308bad17527004364ebcc2d37e5f6 => 224,090,836,727 SPELL ( $214,637,839.93 )
+Contract 0xf16e81dce15b08f326220742020379b855b87df9 => 479,371 SPELL ( $459.14 )
+Contract 0x3597bfd533a99c9aa083587b074434e61eb0a258 => 25,000 SPELL ( $23.94 )
+Contract 0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE => 11,767 SPELL ( $11.27 )
+Contract 0x152649eA73beAb28c5b49B26eb48f7EAD6d4c898 => 9,079 SPELL ( $8.69 )
+Contract 0x4e3fbd56cd56c3e72c1403e103b45db9da5b9d2b => 8,823 SPELL ( $8.45 )
+Contract 0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0 => 1 SPELL ( $0.00 )
 
 TRIO [0x8b40761142b9aa6dc8964e61d0585995425c3d94]: 8,424,980.04 tokens lost / $505.58
 -----------------------------------------------

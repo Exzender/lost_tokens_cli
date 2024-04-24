@@ -133,7 +133,9 @@ async function getTokenInfo(web3, contractAddress) {
             console.error(e);
         }
 
-        if (priceObj.price === 0) {
+        if (ticker === 'VEN') ticker = 'VET';
+
+        if (priceObj.price === 0 || ticker === 'VET') {
             try {
                 const req = (await fetch(`https://min-api.cryptocompare.com/data/price?fsym=${ticker}&tsyms=USD`));
                 if (req.status === 200) {
