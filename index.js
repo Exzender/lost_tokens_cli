@@ -4,9 +4,11 @@ const { Web3 } = require('web3');
 require('dotenv').config();
 
 const { numberWithCommas, parseAddress, processOneToken, formatTokenResult, loadExcludes } = require('./functions');
+const { getEtherscanPrices } = require('./etherscan');
 const excludedMap = loadExcludes();
 
 const EXCLUDES = process.env.EXCLUDES !== 'false';
+const ETHERSCAN = process.env.ETHERSCAN !== 'false';
 const RESULTS = process.env.RESULTS || '';
 
 // NOTE default tokens and contracts list moved to const.js file
@@ -20,7 +22,21 @@ const CONTRACTS_FILE = process.env.CONTRACTS_FILE || 'eth_tokens_list.txt';
 
 // main ()
 (async () => {
-    console.log(EXCLUDES);
+    console.log('use excludes: ', EXCLUDES);
+
+    let fromEtherscan; // map()
+    let etherscanList = '';
+    if (ETHERSCAN) {
+        fromEtherscan = await getEtherscanPrices();
+        let prefix = '';
+        let counter = 0;
+        for (const address of fromEtherscan.keys()) { // Using the default iterator (could be `map.entries()` instead)
+            etherscanList += prefix + address;
+            prefix = '\n';
+            counter++;
+        }
+        console.log(`Contracts found on Etherscan: ${counter}`);
+    }
 
     // can provide active chain via env var.
     // list of supported predefined chains in rpcMap const.
@@ -38,10 +54,10 @@ const CONTRACTS_FILE = process.env.CONTRACTS_FILE || 'eth_tokens_list.txt';
     let parsed;
     let parsedContracts;
     if (chain === 'eth') {
-        const tokensFromFile = fs.readFileSync(path.resolve(__dirname + '/in', TOKENS_FILE), 'utf8');
+        const tokensFromFile = ETHERSCAN ? etherscanList : fs.readFileSync(path.resolve(__dirname + '/in', TOKENS_FILE), 'utf8');
         parsed = parseAddress(web3provider, tokensFromFile) + '\n' + chainTokensStr;
 
-        const contractsFromFile = fs.readFileSync(path.resolve(__dirname + '/in', CONTRACTS_FILE), 'utf8');
+        const contractsFromFile = ETHERSCAN ? etherscanList : fs.readFileSync(path.resolve(__dirname + '/in', CONTRACTS_FILE), 'utf8');
         parsedContracts = parseAddress(web3provider, contractsFromFile) + '\n' + chainContractsStr;
     } else {
         parsed = chainTokensStr;
@@ -69,7 +85,8 @@ const CONTRACTS_FILE = process.env.CONTRACTS_FILE || 'eth_tokens_list.txt';
 
         for (const tokenAddress of chainTokens) {
             console.time('getOneBalance');
-            const res = await processOneToken(web3provider, contractListArray, tokenAddress);
+            const token = fromEtherscan.get(tokenAddress.toLowerCase());
+            const res = await processOneToken(web3provider, contractListArray, tokenAddress, token);
 
             const formatted = formatTokenResult(res);
 

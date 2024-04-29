@@ -26,6 +26,7 @@ Your `.env` now contains the following environment variables:
 - `CHAIN` (placeholder) - Blockchain ticker - where to search for losses. `eth` by default
 - `EXCLUDES` (placeholder) - Exclude or not from results some tokens at some contracts, cause they are not losses. `true` by default.
 - `RESULTS` (placeholder) - Pass to script previous results of script work without collecting actual values.
+- `ETHERSCAN` (placeholder) - Flag to use etherscan scanner to get actual tokens list and their prices. `true` by default.
 
 Start app:
 

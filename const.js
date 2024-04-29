@@ -83,10 +83,10 @@ const ethRpcArray = [
     'https://rpc.mevblocker.io', // 0:40
     'https://ethereum.blockpi.network/v1/rpc/public', // 0:40
     'https://ethereum.blockpi.network/v1/rpc/public', // 0:40
-    'https://ethereum.blockpi.network/v1/rpc/public', // 0:40
-    'https://ethereum.blockpi.network/v1/rpc/public', // 0:40
-    'https://ethereum.blockpi.network/v1/rpc/public', // 0:40
-    'https://ethereum.blockpi.network/v1/rpc/public', // 0:40
+    // 'https://ethereum.blockpi.network/v1/rpc/public', // 0:40
+    // 'https://ethereum.blockpi.network/v1/rpc/public', // 0:40
+    // 'https://ethereum.blockpi.network/v1/rpc/public', // 0:40
+    // 'https://ethereum.blockpi.network/v1/rpc/public', // 0:40
     // 'https://eth.drpc.org', // 0:40  // disabled
     // 'https://eth.drpc.org', // 0:40  // disabled
     // 'https://eth.drpc.org', // 0:40  // disabled

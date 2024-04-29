@@ -55,59 +55,66 @@ function numberWithCommas(x) {
  *
  * @param {Object} web3 - The web3 instance.
  * @param {string} contractAddress - The contract address of the token.
+ * @param {Object} tokenObject - Token info from Etherscan.
  * @return {Object} An object containing token information.
  */
-async function getTokenInfo(web3, contractAddress) {
+async function getTokenInfo(web3, contractAddress, tokenObject) {
     const token = new web3.eth.Contract(ERC20, contractAddress);
 
     // NOTE with web3 v4 it will not provide data auto field when calling contract method - and some nodes will fail to
     // process request without data field
     let ticker, validToken, decimals;
 
-    try {
-        ticker = await token.methods.symbol().call({data: '0x1'}); // ticker
-        console.log(`"symbol" ticker: ${ticker}`)
+    if (tokenObject) {
+        ticker = tokenObject.symbol;
         validToken = true;
-    } catch (e) {
-        console.error('error getting token symbol');
-    }
+    } else {
 
-    if (!ticker) { // retry with another node
-        if (rpcMap.has(`${chain}2`)) {
-            const rpc2 = rpcMap.get(`${chain}2`);
-            const web3provider = new Web3(rpc2);
-            const token2 = new web3provider.eth.Contract(ERC20, contractAddress);
-            try {
-                ticker = await token2.methods.symbol().call({data: '0x1'}); // ticker
-                console.log(`"2nd token symbol" ticker: ${ticker}`)
-                validToken = true;
-            } catch (e) {
-                console.error('error getting token  symbol 2nd try');
+        try {
+            ticker = await token.methods.symbol().call({data: '0x1'}); // ticker
+            console.log(`"symbol" ticker: ${ticker}`)
+            validToken = true;
+        } catch (e) {
+            console.error('error getting token symbol');
+        }
+
+        if (!ticker) { // retry with another node
+            if (rpcMap.has(`${chain}2`)) {
+                const rpc2 = rpcMap.get(`${chain}2`);
+                const web3provider = new Web3(rpc2);
+                const token2 = new web3provider.eth.Contract(ERC20, contractAddress);
+                try {
+                    ticker = await token2.methods.symbol().call({data: '0x1'}); // ticker
+                    console.log(`"2nd token symbol" ticker: ${ticker}`)
+                    validToken = true;
+                } catch (e) {
+                    console.error('error getting token  symbol 2nd try');
+                }
             }
         }
-    }
 
-    if (!ticker) {
-        try {
-            ticker = await token.methods.ticker().call({data: '0x1'}); // ticker
-            console.log(`"ticker" ticker: ${ticker}`)
-            validToken = true;
-        } catch (e) {
-            // console.error(e);
+        if (!ticker) {
+            try {
+                ticker = await token.methods.ticker().call({data: '0x1'}); // ticker
+                console.log(`"ticker" ticker: ${ticker}`)
+                validToken = true;
+            } catch (e) {
+                // console.error(e);
+            }
         }
-    }
 
-    if (!ticker) {
-        try {
-            const tokenNonStd = new web3.eth.Contract(ERC20n, contractAddress);
-            const symbol32 = await tokenNonStd.methods.symbol().call({data: '0x1'}); // ticker
-            ticker = (web3.utils.hexToAscii(symbol32)).replaceAll(String.fromCharCode(0), '')
-            console.log(`"bytes32" ticker: ${ticker}`)
-            validToken = true;
-        } catch (e) {
-            // console.error(e);
-            validToken = false;
-            ticker = 'unknown';
+        if (!ticker) {
+            try {
+                const tokenNonStd = new web3.eth.Contract(ERC20n, contractAddress);
+                const symbol32 = await tokenNonStd.methods.symbol().call({data: '0x1'}); // ticker
+                ticker = (web3.utils.hexToAscii(symbol32)).replaceAll(String.fromCharCode(0), '')
+                console.log(`"bytes32" ticker: ${ticker}`)
+                validToken = true;
+            } catch (e) {
+                // console.error(e);
+                validToken = false;
+                ticker = 'unknown';
+            }
         }
     }
 
@@ -124,6 +131,7 @@ async function getTokenInfo(web3, contractAddress) {
     };
 
     if (validToken) {
+
         try {
             const req = (await fetch(`https://api-data.absolutewallet.com/api/v1/currencies/minimal/${chain}/${contractAddress}?fiat=USD`));
             if (req.status === 200) {
@@ -133,9 +141,9 @@ async function getTokenInfo(web3, contractAddress) {
             console.error(e);
         }
 
-        if (ticker === 'VEN') ticker = 'VET';
+        // if (ticker === 'VEN') ticker = 'VET';
 
-        if (priceObj.price === 0 || ticker === 'VET') {
+        if (priceObj.price === 0) { // || ticker === 'VET') {
             try {
                 const req = (await fetch(`https://min-api.cryptocompare.com/data/price?fsym=${ticker}&tsyms=USD`));
                 if (req.status === 200) {
@@ -145,6 +153,11 @@ async function getTokenInfo(web3, contractAddress) {
             } catch (e) {
                 console.error(e);
             }
+        }
+
+        if (tokenObject && tokenObject.price !== '0.00') {
+            priceObj['price'] = Number(tokenObject.price);
+            console.log(`[ES] ${ticker} price : ${priceObj['price']}`);
         }
     }
 
@@ -365,8 +378,8 @@ async function findBalances(web3, contractList, tokenObject) {
  * @param {string} tokenAddress - The address of the token to be processed.
  * @returns {Promise<Object>} - A promise that resolves to an object containing the processed token information.
  */
-async function processOneToken(web3, contractList, tokenAddress) {
-    const tokenObject = await getTokenInfo(web3, tokenAddress)
+async function processOneToken(web3, contractList, tokenAddress, token) {
+    const tokenObject = await getTokenInfo(web3, tokenAddress, token);
 
     let localList = [...contractList];
 
@@ -397,6 +410,7 @@ async function processOneToken(web3, contractList, tokenAddress) {
  * Formats the result of a token balance check.
  * @function formatTokenResult
  * @param {Object} res - An object containing the result of a token balance check.
+ * @param {boolean} exclude - Exclude some contracts from lost.
  * @returns {Object} - An object containing the formatted result string and the value in dollars.
  */
 function formatTokenResult(res, exclude = true) {

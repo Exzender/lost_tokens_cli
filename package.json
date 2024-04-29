@@ -1,6 +1,6 @@
 {
   "name": "lost_tokens_cli",
-  "version": "1.1.9",
+  "version": "1.2.1",
   "description": "EVM blockchain lost tokens scanner CLI",
   "engines": {
     "node": ">=18.0.0"
@@ -17,6 +17,10 @@
     "dotenv": "^16.3.1",
     "jest": "^29.7.0",
     "node-fetch": "^3.3.2",
-    "web3": "^4.1.2"
+    "web3": "^4.1.2",
+    "@xmldom/xmldom": "^0.8.10",
+    "async": "^3.2.5",
+    "xmldom": "^0.6.0",
+    "xpath": "^0.0.34"
   }
 }
