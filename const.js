@@ -1,11 +1,11 @@
 const eth_tokens = [
-    '0xdac17f958d2ee523a2206206994597c13d831ec7', // USDT
-    '0xB8c77482e45F1F44dE1745F52C74426C631bDD52', // BNB
-    '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48', // USDC
-    '0xae7ab96520de3a18e5e111b5eaab095312d7fe84',
-    '0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0', // MATIC
-    '0x3883f5e181fccaf8410fa61e12b59bad963fb645',
-    '0x2260fac5e5542a773aa44fbcfedf7c193bc2c599', // WBTC
+    '0xdac17f958d2ee523a2206206994597c13d831ec7' // USDT
+    // '0xB8c77482e45F1F44dE1745F52C74426C631bDD52', // BNB
+    // '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48', // USDC
+    // '0xae7ab96520de3a18e5e111b5eaab095312d7fe84',
+    // '0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0', // MATIC
+    // '0x3883f5e181fccaf8410fa61e12b59bad963fb645',
+    // '0x2260fac5e5542a773aa44fbcfedf7c193bc2c599', // WBTC
 ]
 
 const eth_contracts = [
