@@ -152,4 +152,5 @@ const CONTRACTS_FILE = process.env.CONTRACTS_FILE || 'eth_tokens_list.txt';
 
     fs.writeFileSync(path.resolve(__dirname + '/out', 'lost_tokens_result.txt'), resStr, 'utf8');
     fs.writeFileSync(path.resolve(__dirname + '/out', 'lost_tokens_result.json'), JSON.stringify(resultsArray, (_, v) => typeof v === 'bigint' ? v.toString() : v), 'utf8');
+    process.exit(0);
 })();
