@@ -262,6 +262,25 @@ function getWorkersStatus(workers) {
             return false;
         }
     }
+
+    // check if all workers dead
+    let flag = false;
+    for (let worker of workers) {
+        if (!worker.isDead) {
+            flag = true;
+            break;
+        }
+    }
+
+    // if all workers dead - reset them
+    if (!flag) {
+        console.log('All workers are DEAD - resetting...');
+        for (let worker of workers) {
+            worker.isDead = false;
+        }
+        return false;
+    }
+
     return true;
 }
 
