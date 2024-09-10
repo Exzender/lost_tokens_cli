@@ -134,4 +134,17 @@ const getEtherscanPrices = async () => {
     return spider.getArray();
 }
 
-module.exports = { getEtherscanPrices };
+const getEtherscanApiPrices = async () => {
+    console.log('Starting parsing etherscan');
+    const res = await fetch('https://api.dex223.io/v1/etherscan/');
+    const json = await res.json();
+    
+    const ret = new Map();
+    for (let o of Object.keys(json)) {
+        ret.set(o, json[o]);        
+    }
+    
+    return ret;
+}
+
+module.exports = { getEtherscanPrices, getEtherscanApiPrices };

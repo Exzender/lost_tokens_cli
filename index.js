@@ -4,7 +4,7 @@ const { Web3 } = require('web3');
 require('dotenv').config();
 
 const { numberWithCommas, parseAddress, processOneToken, formatTokenResult, loadExcludes } = require('./functions');
-const { getEtherscanPrices } = require('./etherscan');
+const { getEtherscanApiPrices } = require('./etherscan');
 const excludedMap = loadExcludes();
 
 const EXCLUDES = process.env.EXCLUDES !== 'false';
@@ -27,7 +27,7 @@ const CONTRACTS_FILE = process.env.CONTRACTS_FILE || 'eth_tokens_list.txt';
     let fromEtherscan; // map()
     let etherscanList = '';
     if (ETHERSCAN) {
-        fromEtherscan = await getEtherscanPrices();
+        fromEtherscan = await getEtherscanApiPrices();
         let prefix = '';
         let counter = 0;
         for (const address of fromEtherscan.keys()) { // Using the default iterator (could be `map.entries()` instead)
@@ -37,7 +37,7 @@ const CONTRACTS_FILE = process.env.CONTRACTS_FILE || 'eth_tokens_list.txt';
         }
         console.log(`Contracts found on Etherscan: ${counter}`);
     }
-
+    
     // can provide active chain via env var.
     // list of supported predefined chains in rpcMap const.
     const chain = (process.env.CHAIN || chains[0]).toLowerCase();
