@@ -1,11 +1,10 @@
 const path = require('path');
 const { Web3 } = require('web3');
 const BigNumber = require('bignumber.js');
+const axios = require('axios');
 
 const { ERC20, ERC20n, rpcMap, ethRpcArray
      } = require('./const');
-
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 // how many concurrent requests to make - different node may limit number of incoming requests - so 20 is a good compromise
 // const asyncProcsNumber = 5;
@@ -61,7 +60,7 @@ function numberWithCommas(x, places = 2) {
  */
 async function getTokenInfo(web3, contractAddress, tokenObject) {
     const token = new web3.eth.Contract(ERC20, contractAddress);
-
+    
     // NOTE with web3 v4 it will not provide data auto field when calling contract method - and some nodes will fail to
     // process request without data field
     let ticker, validToken, decimals;
@@ -134,23 +133,18 @@ async function getTokenInfo(web3, contractAddress, tokenObject) {
     if (validToken) {
 
         try {
-            const req = (await fetch(`https://api-data.absolutewallet.com/api/v1/currencies/minimal/${chain}/${contractAddress}?fiat=USD`));
-            if (req.status === 200) {
-                priceObj = (await req.json());
-            }
+            const apiAddress = `https://api-data.absolutewallet.com/api/v1/currencies/minimal/${chain}/${contractAddress}?fiat=USD`;
+            const req = await axios(apiAddress);
+            priceObj = req.data;
         } catch (e) {
-            console.error(e);
+            // console.error(e);
         }
-
-        // if (ticker === 'VEN') ticker = 'VET';
-
+       
         if (priceObj.price === 0) { // || ticker === 'VET') {
-            try {
-                const req = (await fetch(`https://min-api.cryptocompare.com/data/price?fsym=${ticker}&tsyms=USD`));
-                if (req.status === 200) {
-                    priceObj = (await req.json());
 
-                }
+            try {
+                const req = (await axios(`https://min-api.cryptocompare.com/data/price?fsym=${ticker}&tsyms=USD`));
+                priceObj = req.data;
             } catch (e) {
                 console.error(e);
             }
@@ -161,7 +155,7 @@ async function getTokenInfo(web3, contractAddress, tokenObject) {
             console.log(`[ES] ${ticker} price : ${priceObj['price']}`);
         }
     }
-
+    
     return {
         address: contractAddress,
         ticker,

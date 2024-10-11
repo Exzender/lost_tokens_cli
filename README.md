@@ -27,6 +27,7 @@ Your `.env` now contains the following environment variables:
 - `EXCLUDES` (placeholder) - Exclude or not from results some tokens at some contracts, cause they are not losses. `true` by default.
 - `RESULTS` (placeholder) - Pass to script previous results of script work without collecting actual values.
 - `ETHERSCAN` (placeholder) - Flag to use etherscan scanner to get actual tokens list and their prices. `true` by default.
+- `ETHERSCAN_KEY` (placeholder) - API key to query requests to Etherscan - for checking smart-contracts code.
 
 Start app:
 

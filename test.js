@@ -15,13 +15,30 @@ describe('getTokenInfo', () => {
             ticker: 'USDC',
             valid: true,
             decimals: 6,
-            price: 1
+            price: 1,
+            logo: 'https://s2.coinmarketcap.com/static/img/coins/64x64/3408.png'
+
         };
 
-        const result = await getTokenInfo(web3provider, contractAddress);
-        result.price = 1;
+        const token = {
+            "rank": 3,
+            "name": "USDC",
+            "logo": "https://etherscan.io/token/images/centre-usdc_28.png",
+            "symbol": "USDC",
+            "price": 1,
+            "updated": "2024-10-05T01:09:15.356636"
+        }
+        
+        // try {
+            const result = await getTokenInfo(web3provider, contractAddress, token);
+            console.log(result);
+            
+            result.price = 1;
 
-        assert.deepStrictEqual(result, expectedTokenInfo);
+            assert.deepStrictEqual(result, expectedTokenInfo);
+        // } catch (e) {
+        //     console.error(e);
+        // }
     });
 });
 
@@ -84,39 +101,6 @@ describe('findBalances', () => {
     });
 });
 
-// describe('processOneToken', () => {
-//     it('should process one token and return result', async () => {
-//         // Mock web3 instance and contractList
-//         const web3 = new Web3(rpc);
-//         const contractList = ['0xabcdef123456789', '0x987654321fedcba'];
-//         const tokenAddress = '0x123456789abcdef';
-//         const expectedTokenResult = {
-//             tokenAddress: '0x123456789abcdef',
-//             ticker: 'TEST',
-//             decimals: 18,
-//             price: 10,
-//             records: [
-//                 {
-//                     amount: '1000000000000000000',
-//                     roundedAmount: 1,
-//                     dollarValue: '10',
-//                     contract: '0xabcdef123456789'
-//                 },
-//                 {
-//                     amount: '2000000000000000000',
-//                     roundedAmount: 2,
-//                     dollarValue: '20',
-//                     contract: '0x987654321fedcba'
-//                 }
-//             ]
-//         };
-//
-//         const result = await processOneToken(web3, contractList, tokenAddress);
-//
-//         assert.deepStrictEqual(result, expectedTokenResult);
-//     });
-// });
-
 describe('formatTokenResult', () => {
     it('should format token result', () => {
         const tokenResult = {
@@ -128,15 +112,15 @@ describe('formatTokenResult', () => {
                 { amount: '1000000000000000000', roundedAmount: 1, dollarValue: '10', contract: '0xabcdef123456789' },
                 { amount: '2000000000000000000', roundedAmount: 2, dollarValue: '20', contract: '0x987654321fedcba' } ] };
         const expectedFormattedResult = {
-            "asDollar": 100000000000000000000,
-            "resStr": `TEST [0x123456789abcdef]: 10,000,000,000,000,000,000 tokens lost / $100,000,000,000,000,000,000
+            "amount": 3,
+            "asDollar": 30,
+            "resStr": `TEST [0x123456789abcdef]: 3 tokens lost / $30
 -----------------------------------------------
 Contract 0xabcdef123456789 => 1 TEST ( $10 )
 Contract 0x987654321fedcba => 2 TEST ( $20 )
 `};
 
         const result = formatTokenResult(tokenResult);
-
         assert.deepStrictEqual(result, expectedFormattedResult);
     });
 });
