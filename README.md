@@ -24,10 +24,13 @@ cp .env.local.example .env
 Your `.env` now contains the following environment variables:
 
 - `CHAIN` (placeholder) - Blockchain ticker - where to search for losses. `eth` by default
-- `EXCLUDES` (placeholder) - Exclude or not from results some tokens at some contracts, cause they are not losses. `true` by default.
+- `EXCLUDE_BY_LIST` (placeholder) - Exclude or not from results some manually selected contracts. `true` by default.
+- `EXCLUDE_BY_MINT` (placeholder) - Exclude or not from results some contracts, having BURN and MINT functions. `true` by default.
+- `EXCLUDE_BY_EXTRACT` (placeholder) - Exclude or not from results some contracts, possibly having Extract function. `true` by default.
 - `RESULTS` (placeholder) - Pass to script previous results of script work without collecting actual values.
 - `ETHERSCAN` (placeholder) - Flag to use etherscan scanner to get actual tokens list and their prices. `true` by default.
 - `ETHERSCAN_KEY` (placeholder) - API key to query requests to Etherscan - for checking smart-contracts code.
+- `COLLECT_EXTRACT` (placeholder) - Collect contract codes from Etherscan and store them locally.
 
 Start app:
 

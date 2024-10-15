@@ -3,37 +3,74 @@ const path = require('path');
 const { Web3 } = require('web3');
 require('dotenv').config();
 
-const { numberWithCommas, parseAddress, processOneToken, formatTokenResult, loadExcludes } = require('./functions');
-const { getEtherscanApiPrices } = require('./etherscan');
+const { numberWithCommas, parseAddress, processOneToken, formatTokenResult, loadExcludes,
+    getContractAbi, saveContractAbi, getContractCode, saveContractCode, findExtractInContract } = require('./functions');
+const { getEtherscanApiPrices, getEtherscanContractAbi, getEtherscanContractCode } = require('./etherscan');
 const excludedMap = loadExcludes();
 
-const EXCLUDES = process.env.EXCLUDES !== 'false';
+const EXCLUDE_BY_LIST = process.env.EXCLUDE_BY_LIST !== 'false';
+const EXCLUDE_BY_MINT = process.env.EXCLUDE_BY_MINT !== 'false';
+const EXCLUDE_BY_EXTRACT = process.env.EXCLUDE_BY_EXTRACT !== 'false';
 const ETHERSCAN = process.env.ETHERSCAN !== 'false';
 const RESULTS = process.env.RESULTS || '';
 
 // NOTE default tokens and contracts list moved to const.js file
 const { tokens, contracts, rpcMap } = require('./const');
+const {promises: fsAsync} = require("fs");
 const chains = [...rpcMap.keys()];
 
 // NOTE: // default: 'eth_tokens_list.txt' // w/o zero price = 'tokens_list.txt'; // fast test = 'tokens_list_short.txt';
 const TOKENS_FILE = process.env.TOKENS_FILE || 'eth_tokens_list.txt';
 // NOTE: // default: 'eth_contracts_list.txt' // w/o zero price = 'excluded_tokens.txt'; // fast test = 'tokens_list_short.txt';
 const CONTRACTS_FILE = process.env.CONTRACTS_FILE || 'eth_tokens_list.txt';
+const COLLECT_EXTRACT = process.env.COLLECT_EXTRACT !== 'false';
 
 // main ()
 (async () => {
-    console.log('use excludes: ', EXCLUDES);
-
+    console.log('use excludes: ', EXCLUDE_BY_LIST, EXCLUDE_BY_MINT, EXCLUDE_BY_EXTRACT);
+    
     let fromEtherscan; // map()
     let etherscanList = '';
     if (ETHERSCAN) {
         fromEtherscan = await getEtherscanApiPrices();
         let prefix = '';
         let counter = 0;
+
+        const extractFileName= 'contracts_with_extract.csv';
+        if (COLLECT_EXTRACT) {
+            const headers = 'address;contract;function;burn-mint\n'
+            await fs.writeFileSync(path.resolve(__dirname + '/out', extractFileName), headers, 'utf8');
+        }
+        
         for (const address of fromEtherscan.keys()) { // Using the default iterator (could be `map.entries()` instead)
+            
+            // test new functions with one token
+            // if (address.toLowerCase() !== '0x3405a1bd46b85c5c029483fbecf2f3e611026e45') continue;
+            
             etherscanList += prefix + address;
             prefix = '\n';
             counter++;
+            
+            let abi = await getContractCode(address);
+            if (!abi) {
+                abi = await getEtherscanContractCode(address);
+                await saveContractCode(address, abi);
+                // process.exit(1);
+            }
+
+            if (COLLECT_EXTRACT) {
+                const exObj = await findExtractInContract(address, abi);
+                if (exObj.burnMint || exObj.contracts.length) {
+                    const outStr = [
+                        exObj.address,
+                        exObj.contracts.join(' | '),
+                        exObj.functions.join(' | '),
+                        exObj.burnMint ? 'yes' : ''
+                    ].join(';') + '\n';
+                    
+                    fs.appendFileSync(path.resolve(__dirname + '/out', extractFileName), outStr, 'utf8');
+                }
+            }
         }
         console.log(`Contracts found on Etherscan: ${counter}`);
     }
@@ -111,7 +148,7 @@ const CONTRACTS_FILE = process.env.CONTRACTS_FILE || 'eth_tokens_list.txt';
         // }
     }
 
-    if (EXCLUDES) {
+    if (EXCLUDE_BY_LIST) {
         // mark excluded results
         for (const res of resultsArray) {
             const tokenAddress = res.tokenAddress.toLowerCase();
@@ -140,7 +177,7 @@ const CONTRACTS_FILE = process.env.CONTRACTS_FILE || 'eth_tokens_list.txt';
     counter = 0;
     let resStr = '';
     for (const res of resultsArray) {
-        const formatted = formatTokenResult(res, EXCLUDES);
+        const formatted = formatTokenResult(res, EXCLUDE_BY_LIST, EXCLUDE_BY_MINT, EXCLUDE_BY_EXTRACT);
         resStr += formatted.resStr + '\n';
         wholeSum += formatted.asDollar;
         counter++;

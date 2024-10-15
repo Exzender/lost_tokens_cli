@@ -2,9 +2,11 @@ const path = require('path');
 const { Web3 } = require('web3');
 const BigNumber = require('bignumber.js');
 const axios = require('axios');
+const fsAsync = require('fs').promises;
 
 const { ERC20, ERC20n, rpcMap, ethRpcArray
      } = require('./const');
+const fs = require("fs");
 
 // how many concurrent requests to make - different node may limit number of incoming requests - so 20 is a good compromise
 // const asyncProcsNumber = 5;
@@ -395,6 +397,7 @@ async function findBalances(web3, contractList, tokenObject) {
  * @param {Object} web3 - A Web3.js instance.
  * @param {Array} contractList - An array of contract objects.
  * @param {string} tokenAddress - The address of the token to be processed.
+ * @param {Object} token - Token info got from Etherscan
  * @returns {Promise<Object>} - A promise that resolves to an object containing the processed token information.
  */
 async function processOneToken(web3, contractList, tokenAddress, token) {
@@ -414,12 +417,18 @@ async function processOneToken(web3, contractList, tokenAddress, token) {
 
     const results = await findBalances(web3, localList, tokenObject);
 
+    // check if contract has extract or burn/mint functions    
+    let contractCode = await getContractCode(tokenAddress);
+    const exObj = await findExtractInContract(tokenAddress, contractCode);
+    
     return {
         tokenAddress,
         ticker: tokenObject.ticker,
         decimals: tokenObject.decimals,
         price: tokenObject.price,
         logo: tokenObject.logo,
+        hasExtract: exObj.functions.length > 0,
+        hasBurnMint: exObj.burnMint,
         records: results
     }
 }
@@ -429,10 +438,12 @@ async function processOneToken(web3, contractList, tokenAddress, token) {
  * Formats the result of a token balance check.
  * @function formatTokenResult
  * @param {Object} res - An object containing the result of a token balance check.
- * @param {boolean} exclude - Exclude some contracts from lost.
+ * @param {boolean} excludeList - Exclude some contracts from lost.
+ * @param {boolean} excludeMint - Exclude some contracts from lost.
+ * @param {boolean} excludeExtract - Exclude some contracts from lost.
  * @returns {Object} - An object containing the formatted result string and the value in dollars.
  */
-function formatTokenResult(res, exclude = true) {
+function formatTokenResult(res, excludeList = true, excludeMint = true, excludeExtract = true) {
     let localStr = ''
 
     if (!res.ticker) { // invalid token
@@ -451,7 +462,7 @@ function formatTokenResult(res, exclude = true) {
     for (const record of res.records) {
         let prefix = '';
         const amountN = (typeof record.amount === 'string') ? BigInt(record.amount) : record.amount;
-        if (record.exclude && exclude) {
+        if ((record.exclude && excludeList) || (res.hasExtract && excludeExtract) || (res.hasBurnMint && excludeMint) ) {
             prefix = '[X] ';
         } else {
             sum += amountN;// BigInt(record.amount);
@@ -491,6 +502,190 @@ function loadExcludes() {
     return res;
 }
 
+async function saveContractAbi(address, abi) {
+    const fileName = `${address.toLowerCase()}.abi`;
+    
+    if (abi.length) {
+        const ret = [];
+        // filter - get only function names
+        for (let element of abi) {
+            if (element['type'] === 'function') {
+                ret.push(element['name'].toLowerCase());
+            }
+        }
+        await fsAsync.writeFile(path.resolve(__dirname + '/abi_full', fileName), JSON.stringify(abi), 'utf8');
+        await fsAsync.writeFile(path.resolve(__dirname + '/abi_functions', fileName), JSON.stringify(ret), 'utf8');
+    } else {
+        await fsAsync.writeFile(path.resolve(__dirname + '/abi_full', fileName), '[]', 'utf8');
+        await fsAsync.writeFile(path.resolve(__dirname + '/abi_functions', fileName), '[]', 'utf8');
+    }
+}
+
+async function getContractAbi(address) {
+    const fileName = `${address.toLowerCase()}.abi`;
+    try {
+        const res = await fsAsync.readFile(path.resolve(__dirname + '/abi_functions', fileName), 'utf8');
+        return JSON.parse(res);
+    } catch (e) {
+         // no file
+    }
+}
+
+async function getContractCode(address) {
+    const fileName = `${address.toLowerCase()}.sol`;
+    try {
+        const res = await fsAsync.readFile(path.resolve(__dirname + '/contracts', fileName), 'utf8');
+        return res; //JSON.parse(res);
+    } catch (e) {
+         // no file
+    }
+}
+
+async function saveContractCode(address, sol) {
+    const fileName = `${address.toLowerCase()}.sol`;
+
+    if (sol) {
+        const ret = [];
+        // filter - get only function names
+        // for (let element of abi) {
+        //     if (element['type'] === 'function') {
+        //         ret.push(element['name'].toLowerCase());
+        //     }
+        // }
+        await fsAsync.writeFile(path.resolve(__dirname + '/contracts', fileName), sol, 'utf8');
+        // await fsAsync.writeFile(path.resolve(__dirname + '/abi_functions', fileName), JSON.stringify(ret), 'utf8');
+    } else {
+        // await fsAsync.writeFile(path.resolve(__dirname + '/abi_full', fileName), '[]', 'utf8');
+        await fsAsync.writeFile(path.resolve(__dirname + '/contracts', fileName), JSON.stringify({}), 'utf8');
+    }
+}
+
+function findContractBlocks(code) {
+    const blocks = [];
+    let startIndex = 0;
+    let endIndex = 0;
+
+    while (startIndex < code.length) {
+        // Find the start of a contract
+        startIndex = code.indexOf('\ncontract ', startIndex);
+        if (startIndex === -1) break;
+
+        // Find the corresponding opening brace '{'
+        endIndex = code.indexOf('{', startIndex);
+        if (endIndex === -1) break;
+
+        // Initialize a counter for braces to match correctly
+        let braceCount = 1;
+        let currentIndex = endIndex + 1;
+
+        // Loop until we find the closing brace
+        while (braceCount > 0 && currentIndex < code.length) {
+            if (code[currentIndex] === '{') {
+                braceCount++;
+            } else if (code[currentIndex] === '}') {
+                braceCount--;
+            }
+            currentIndex++;
+        }
+
+        // If we matched all braces, push the block into the array
+        if (braceCount === 0) {
+            blocks.push(code.substring(startIndex, currentIndex));
+        }
+
+        // Move startIndex forward for the next search
+        startIndex = currentIndex;
+    }
+
+    return blocks;
+}
+
+// Function to find all functions containing .transfer( in a contract block
+function findTransferFunctions(contractBlocks) {
+    const transferFunctions = [];
+
+    for (const block of contractBlocks) {
+        const lines = block.split('\n');
+        const functions = [];
+
+        let functionName = '';
+        let functionBody = '';
+        let isInFunction = false;
+        let isMintFunction = false;
+        let isBurnFunction = false;
+
+        for (const line of lines) {
+            // Check if it's the start of a function
+            if (line.includes('function ') && !line.includes(' transfer(')) {
+
+                if (line.includes(' burn')) isBurnFunction = true;
+                if (line.includes(' mint')) isMintFunction = true;
+                // If we were already inside a function, save the previous one
+                if (isInFunction) {
+                    // Only push if the function body contains .transfer( and not super.transfer(
+                    if (functionBody.includes('.transfer(') && !functionBody.includes('super.transfer(') && !functionBody.includes('owner.transfer(')) {
+                        functions.push({ name: functionName, body: functionBody.trim() });
+                    }
+                }
+
+                // Reset for the new function
+                functionName = line.split('function ')[1].split('(')[0].trim();
+                functionBody = line;
+                isInFunction = true;
+            } else if (isInFunction) {
+                // Continue building the function body
+                functionBody += `\n${line}`;
+            }
+
+            // Check if we reached the end of the function
+            if (isInFunction && line.includes('}')) {
+                // Only push if the function body contains .transfer( and not super.transfer(
+                if (functionBody.includes('.transfer(') && !functionBody.includes('super.transfer(') && !functionBody.includes('owner.transfer(')) {
+                    functions.push({ name: functionName, body: functionBody.trim() });
+                }
+                isInFunction = false; // Reset
+                functionName = '';
+                functionBody = '';
+            }
+        }
+
+        if (functions.length > 0 || (isBurnFunction && isMintFunction)) {
+            transferFunctions.push({
+                contract: block.split(' ')[1].trim(),
+                functions: functions,
+                burnMint: isBurnFunction && isMintFunction
+            });
+        }
+    }
+
+    return transferFunctions;
+}
+
+async function findExtractInContract(address, contract) {
+    // const headers = 'address;contract;function;burn-mint\n'
+    
+    const contractBlocks = findContractBlocks(contract);
+    const transferFunctions = findTransferFunctions(contractBlocks);
+
+    let retObj = {
+        address,
+        contracts: [],
+        functions: [],
+        burnMint: false
+    }
+    
+    transferFunctions.forEach(({ contract, functions, burnMint }) => {
+        retObj.contracts.push(contract);
+        if (burnMint) retObj.burnMint = true;
+        functions.forEach(func => {
+            retObj.functions.push(func.name);
+        });
+    });
+    
+    return retObj;
+}
+
+
 module.exports = {
     getTokenInfo,
     getBalanceOf,
@@ -499,5 +694,10 @@ module.exports = {
     formatTokenResult,
     parseAddress,
     numberWithCommas,
-    loadExcludes
+    loadExcludes,
+    getContractAbi,
+    saveContractAbi,
+    saveContractCode,
+    getContractCode,
+    findExtractInContract
 }

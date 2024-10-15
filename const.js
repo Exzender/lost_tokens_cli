@@ -68,42 +68,42 @@ const rpcMap = new Map([
 
 const ethRpcArray = [
     'https://eth.meowrpc.com', // 0:40
-    'https://eth.meowrpc.com', // 0:40
-    'https://eth.meowrpc.com', // 0:40
-    'https://eth.meowrpc.com', // 0:40
-    'https://eth.meowrpc.com', // 0:40
-    'https://eth.meowrpc.com', // 0:40
-    'https://eth.meowrpc.com', // 0:40
+    // 'https://eth.meowrpc.com', // 0:40
+    // 'https://eth.meowrpc.com', // 0:40
+    // 'https://eth.meowrpc.com', // 0:40
+    // 'https://eth.meowrpc.com', // 0:40
+    // 'https://eth.meowrpc.com', // 0:40
+    // 'https://eth.meowrpc.com', // 0:40
     'https://rpc.mevblocker.io', // 0:40
     'https://rpc.mevblocker.io', // 0:40
     'https://rpc.mevblocker.io', // 0:40
-    'https://rpc.mevblocker.io', // 0:40
-    'https://rpc.mevblocker.io', // 0:40
-    'https://rpc.mevblocker.io', // 0:40
-    'https://rpc.mevblocker.io', // 0:40
+    // 'https://rpc.mevblocker.io', // 0:40
+    // 'https://rpc.mevblocker.io', // 0:40
+    // 'https://rpc.mevblocker.io', // 0:40
+    // 'https://rpc.mevblocker.io', // 0:40
     'https://ethereum.blockpi.network/v1/rpc/public', // 0:40
     'https://ethereum.blockpi.network/v1/rpc/public', // 0:40
     // 'https://ethereum.blockpi.network/v1/rpc/public', // 0:40
     // 'https://ethereum.blockpi.network/v1/rpc/public', // 0:40
     // 'https://ethereum.blockpi.network/v1/rpc/public', // 0:40
     // 'https://ethereum.blockpi.network/v1/rpc/public', // 0:40
-    // 'https://eth.drpc.org', // 0:40  // disabled
+    'https://eth.drpc.org', // 0:40  // disabled
     // 'https://eth.drpc.org', // 0:40  // disabled
     // 'https://eth.drpc.org', // 0:40  // disabled
     'https://eth-pokt.nodies.app',  // 1:10
     'https://eth-pokt.nodies.app',  // 1:10
     'https://eth.llamarpc.com', // 1:50 // disabled
-    'https://eth.llamarpc.com', // 1:50 // disabled
+    // 'https://eth.llamarpc.com', // 1:50 // disabled
     'https://ethereum.publicnode.com', // 1:57
     'https://ethereum.publicnode.com', // 1:57
 
     'https://eth-mainnet.public.blastapi.io', // bad
     'https://eth-mainnet.public.blastapi.io', // bad
-    'https://eth-mainnet.public.blastapi.io', // bad
+    // 'https://eth-mainnet.public.blastapi.io', // bad
     'https://rpc.payload.de', // bad // disabled
     'https://1rpc.io/eth', // 1:06 (with errors) // disabled
     'https://rpc.ankr.com/eth', // bad // disabled
-    'https://core.gashawk.io/rpc', // timeout // disabled
+    // 'https://core.gashawk.io/rpc', // timeout // disabled
     'https://api.securerpc.com/v1', // bad // disabled
     'https://cloudflare-eth.com', // bad // disabled
 
