@@ -12,6 +12,7 @@ const fs = require("fs");
 // const asyncProcsNumber = 5;
 const chains = [...rpcMap.keys()];
 const chain = (process.env.CHAIN || chains[0]).toLowerCase();
+let timePass = 0;
 
 function checkEthAddress(web3, address) {
     try {
@@ -203,6 +204,19 @@ async function getBalanceOf (token, address, iteration){
 async function distributeTasks(workers, contractList) {
     const taskQueue = [...contractList]; // Copy of the original tasks array.
     const completedTasks = [];
+    
+    let timer;
+    
+    function checkAlive() {
+        console.log('waiting > 1.5 mins - resurrecting workers');
+        // timePass = null;
+
+        for (let worker of workers) {
+            worker.isDead = false;
+            worker.isBusy = false;
+        }
+        // return false;    
+    }
 
     async function processTask() {
         if (taskQueue.length === 0) {
@@ -217,6 +231,11 @@ async function distributeTasks(workers, contractList) {
             // Assign the next task to the available worker.
             const task = taskQueue.shift();
             if (!task) return;
+            
+            if (timer) {
+                clearTimeout(timer);
+            }
+            timer = setTimeout(checkAlive, 90000);
             // console.log(`Processing: ${task}`);
             const worker = workers[availableWorkerIndex];
             // console.log(`at: ${worker.token._requestManager._provider.clientUrl}`);
@@ -246,12 +265,35 @@ async function distributeTasks(workers, contractList) {
     }
 
     // console.log(`Completed: ${completedTasks.length}`);
-
+    if (timer) {
+        clearTimeout(timer);
+    }
+    
     // return await Promise.all(completedTasks);
     return completedTasks;
 }
 
 function getWorkersStatus(workers) {
+    // console.log('checking dead workers...');
+
+    // if (!timePass) {
+    //     timePass = new Date();
+    //     // return true;
+    // }
+    //
+    // const interval = new Date().getTime() - timePass.getTime();
+    // if (interval > 60000) {
+    //     console.log('waiting > 2 mins - resurrecting workers');
+    //     timePass = null;
+    //
+    //     for (let worker of workers) {
+    //         worker.isDead = false;
+    //         worker.isBusy = false;
+    //     }
+    //     return false;
+    // }
+
+
     for (let worker of workers) {
         if (worker.isBusy && !worker.isDead) {
             // console.log(`Busy worker: ${worker.token._requestManager._provider.clientUrl} | ${worker.isBusy} | ${worker.isDead}`);
@@ -259,23 +301,28 @@ function getWorkersStatus(workers) {
         }
     }
 
-    // check if all workers dead
-    let flag = false;
-    for (let worker of workers) {
-        if (!worker.isDead) {
-            flag = true;
-            break;
-        }
-    }
+
+    // else {
+        // return true;
+    // }
+    
+    //
+    //
+    // // check if all workers dead
+    // let flag = false;
+    // for (let worker of workers) {
+    //     if (!worker.isDead) {
+    //         console.log(`worker ${worker.token._requestManager._provider.clientUrl} is not dead`);
+    //         flag = true;
+    //         break;
+    //     }
+    // }
 
     // if all workers dead - reset them
-    if (!flag) {
-        console.log('All workers are DEAD - resetting...');
-        for (let worker of workers) {
-            worker.isDead = false;
-        }
-        return false;
-    }
+    // if (!flag) {
+    //     console.log('All workers are DEAD - resetting...');
+    
+    // }
 
     return true;
 }

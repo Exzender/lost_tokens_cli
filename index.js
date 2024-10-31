@@ -137,6 +137,7 @@ const COLLECT_EXTRACT = process.env.COLLECT_EXTRACT !== 'false';
             counter++;
             console.log(counter, '.', res.ticker, ':', formatted.asDollar);
             console.timeEnd('getOneBalance');
+            console.log('');
         }
 
     } else {
