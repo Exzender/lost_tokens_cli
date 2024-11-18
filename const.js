@@ -10,6 +10,7 @@ const eth_tokens = [
 
 const eth_contracts = [
     '0x6bba316c48b49bd1eac44573c5c871ff02958469',
+    '0xe9a0c4aece76d487f3c00241eb74467cdce696c4'    // CoboSafeAccount
     // '0x80fB784B7eD66730e8b1DBd9820aFD29931aab03',
     // '0x4a220e6096b25eadb88358cb44068a3248254675',
     // '0x622dFfCc4e83C64ba959530A5a5580687a57581b',
